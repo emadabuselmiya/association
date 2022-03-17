@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
-    protected $fillable = ['menu_name','link'];
+    protected $fillable = ['menu_name','link', 'slug'];
 
     public function pages(){
         return $this->hasMany(Page::class);

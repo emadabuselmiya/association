@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('title')
-{{ __('Update Menus') }}
+    {{ __('Update Menus') }}
 @stop
 
 @section('content')
@@ -23,7 +23,8 @@
                     <div class="card-body">
                         <x-alert/>
                         <!-- users edit account form start -->
-                        <form method="POST" action="{{ route('menus.update',$menu->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('menus.update',$menu->id) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -32,19 +33,32 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label for="title" class="form-label">{{ __('Menu name') }}</label>
-                                        <input type="text"  class="form-control" id="name" name="name" value="{{ old('name',$menu->name)  }}" required autofocus >
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               onchange="convertToSlug();"
+                                               value="{{ old('name',$menu->name)  }}" required autofocus>
                                     </div>
                                 </div>
                                 {{-- end project title --}}
+
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="title" class="form-label">{{ __('Slug') }}</label>
+                                        <input type="text" class="form-control" id="slug" name="slug"
+                                               value="{{ old('slug',$menu->slug) }}" required autofocus>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label for="title" class="form-label">{{ __('Menu Link') }}</label>
-                                       <div class="d-block">
-                                           <input type="text" style="display: inline-block; width: auto;" class="form-control"  value="{{old('link',Str::after($menu->link,\App\Models\Websit::first()->url.'/'))}}" id="link" name="link"  required autofocus >
-                                           <label for="title" class="form-label">{{\App\Models\Websit::first()->url}}/</label>
-                                       </div>
+                                        <div class="d-block">
+                                            <input type="url" class="form-control" value="{{old('link', $menu->link)}}"
+                                                   id="link" name="link" required autofocus>
+                                        </div>
                                     </div>
-                                    <h6 class="alert alert-primary p-2">{{ __('Note : add direct link in the page here') }} </h6>
+                                    <a href="{{ route('setting-website-edit') }}">
+                                        <h6 class="alert alert-primary p-2">{{ __('Note : add direct link in the page here') }} </h6>
+                                    </a>
 
                                 </div>
 
@@ -67,3 +81,31 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <script>
+        $(window).on("load", function () {
+            var url = "{{ App\Models\Websit::first()->url }}";
+            console.log(url);
+            if (url == "") {
+                alert('يرجى إدخال رابط الموقع')
+            }
+        });
+
+        function convertToSlug() {
+            var Text = document.getElementById("name").value;
+
+            var t = Text.toString().toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\u0621-\u064A0-9-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+/, '').replace(/-+$/, '');
+
+            var url = "{{ App\Models\Websit::first()->url }}" + "/" + t;
+
+            document.getElementById("link").value = url;
+            document.getElementById("slug").value = t;
+
+
+        }
+    </script>
+@stop

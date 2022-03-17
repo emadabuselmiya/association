@@ -29,7 +29,7 @@ class SubMenuController extends Controller
                 ->make(true);
         }
         $subMenus = SubMenu::all();
-        return view('c-panel.sub-menus.index',['subMenus'=>$subMenus]);
+        return view('c-panel.sub-menus.index', ['subMenus' => $subMenus]);
     }
 
 
@@ -42,12 +42,13 @@ class SubMenuController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name'=>'required',
-            'menu_id' => 'required|exists:menus,id'
+            'name' => 'required',
+            'menu_id' => 'required|exists:menus,id',
+            'slug' => 'required|string|unique:menus,slug',
         ]);
 //        dd();
         SubMenu::create($request->all());
-        return redirect()->route('sub-menus.index')->with('success',__('Sub Menu Created Successfully!'));
+        return redirect()->route('sub-menus.index')->with('success', __('Sub Menu Created Successfully!'));
 
     }
 
@@ -60,32 +61,32 @@ class SubMenuController extends Controller
 
     public function edit(SubMenu $sub_menu)
     {
-        return view('c-panel.sub-menus.edit',compact('sub_menu'));
+        return view('c-panel.sub-menus.edit', compact('sub_menu'));
     }
 
 
     public function update(Request $request, SubMenu $sub_menu)
     {
         $validate = $request->validate([
-            'name'=>'required',
+            'name' => 'required',
             'menu_id' => 'required|exists:menus,id'
         ]);
         // dd($request->all());
         $sub_menu->update($request->all());
-        return redirect()->route('sub-menus.index')->with('success',__('Sub Menu Updated Successfully!'));
+        return redirect()->route('sub-menus.index')->with('success', __('Sub Menu Updated Successfully!'));
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(SubMenu $sub_menu)
     {
         $sub_menu->delete();
-        return redirect()->route('sub-menus.index')->with('success',__('Sub Menu Deleted Successfully!'));
+        return redirect()->route('sub-menus.index')->with('success', __('Sub Menu Deleted Successfully!'));
 
     }
 }

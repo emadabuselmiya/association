@@ -21,6 +21,7 @@ $(function () {
         dtVedioAlbumTable = $('.vedio-album-list-table'),
         dtProjectTable = $('.project-list-table'),
         dtPageTable = $('.page-list-table'),
+        dtStaticPageTable = $('.static-page-list-table'),
         dtBlogTable = $('.blog-list-table'),
         dtTeamTable = $('.team-list-table'),
         dtSliderTable = $('.slider-list-table'),
@@ -619,16 +620,10 @@ $(function () {
                 // columns according to JSON
                 {data: 'name'},
                 {data: 'parent'},
+                {data: 'link'},
                 {data: 'actions', orderable: false}
             ],
-            columnDefs: [
-                {
-                    // Actions
-                    targets: 2,
-                    width: '300 px',
-                }
 
-            ],
 
             order: [0, 'asc'],
             dom:
@@ -1051,6 +1046,93 @@ $(function () {
         });
     }
 
+    if (dtStaticPageTable.length) {
+        dtStaticPageTable.DataTable({
+            "processing": true,
+            "serverSide": true,
+            ajax: {
+                url: '/c-panel/pages/static'
+            }, // JSON file to add data
+            columns: [
+                // columns according to JSON
+                {data: 'main_image', orderable: false},
+                {data: 'title'},
+                {data: 'sub_title'},
+                {data: 'actions', orderable: false}
+            ],
+
+            order: [0, 'asc'],
+            dom:
+                '<"d-flex justify-content-between align-items-center header-actions mx-1 row mt-75"' +
+                '<"col-lg-12 col-xl-6" l>' +
+                '<"col-lg-12 col-xl-6 pl-xl-75 pl-0"<"dt-action-buttons text-xl-right text-lg-left text-md-right text-left d-flex align-items-center justify-content-lg-end align-items-center flex-sm-nowrap flex-wrap mr-1"<"mr-1"f>B>>' +
+                '>t' +
+                '<"d-flex justify-content-between mx-2 row mb-1"' +
+                '<"col-sm-12 col-md-6"i>' +
+                '<"col-sm-12 col-md-6"p>' +
+                '>',
+            language: {
+                sLengthMenu: 'Show _MENU_',
+                search: 'بحث',
+                searchPlaceholder: 'بحث..',
+                paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                }
+            },
+            // Buttons with Dropdown
+            buttons: [
+                {
+                    extend: 'collection',
+                    className: 'btn btn-outline-secondary dropdown-toggle mr-2 mt-50',
+                    text: feather.icons['share'].toSvg({class: 'font-small-4 mr-50'}) + 'تصدير',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: feather.icons['printer'].toSvg({class: 'font-small-4 mr-50'}) + 'طباعة',
+                            className: 'dropdown-item',
+                            exportOptions: {columns: [0, 1, 2]}
+                        },
+                        {
+                            extend: 'excel',
+                            text: feather.icons['file'].toSvg({class: 'font-small-4 mr-50'}) + 'اكسل',
+                            className: 'dropdown-item',
+                            exportOptions: {columns: [0, 1, 2]}
+                        },
+                        {
+                            extend: 'pdf',
+                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 mr-50'}) + 'Pdf',
+                            className: 'dropdown-item',
+                            exportOptions: {columns: [0, 1, 2]}
+                        }
+                    ],
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                        $(node).parent().removeClass('btn-group');
+                        setTimeout(function () {
+                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex');
+                        }, 50);
+                    },
+                },
+                {
+                    text: 'اضافة جديد',
+                    className: 'add-new btn btn-primary mt-50',
+                    onclick: "",
+                    attr: {
+                        "type": "button",
+                        "onclick": "location.href = '/c-panel/pages/create'",
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                    }
+
+                },
+            ],
+
+        });
+    }
+
     if (dtBlogTable.length) {
         dtBlogTable.DataTable({
             "processing": true,
@@ -1324,7 +1406,13 @@ $(function () {
                 {data: 'description'},
                 {data: 'actions', orderable: false}
             ],
+            columnDefs: [
+                {
+                    targets: 4,
+                    width: '400px',
 
+                }
+            ],
             order: [1, 'asc'],
             dom:
                 '<"d-flex justify-content-between align-items-center header-actions mx-1 row mt-75"' +

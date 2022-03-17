@@ -11,8 +11,8 @@ class Websit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'websit_title', 'favicon_image', 'logo', 'seo_keyword', 'phone' ,'email' ,'telephone_number'
-        ,'facebook','twitter','youtube','instagram','whatsapp','linkedin','behance'
+        'websit_title', 'favicon_image', 'logo', 'seo_keyword', 'phone', 'email', 'telephone_number'
+        , 'facebook', 'twitter', 'youtube', 'instagram', 'whatsapp', 'linkedin', 'behance', 'address', 'url'
     ];
 
     protected $appends = [
@@ -25,8 +25,7 @@ class Websit extends Model
      */
     public function getFaviconImageUrlAttribute()
     {
-        if(empty($this->favicon_image))
-        {
+        if (empty($this->favicon_image)) {
             return asset('storage/images/default-image.jpg');
         }
 
@@ -39,8 +38,7 @@ class Websit extends Model
      */
     public function getLogoUrlAttribute()
     {
-        if(empty($this->logo))
-        {
+        if (empty($this->logo)) {
             return asset('storage/images/default-image.jpg');
         }
 

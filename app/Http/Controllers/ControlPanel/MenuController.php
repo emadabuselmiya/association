@@ -34,66 +34,52 @@ class MenuController extends Controller
         }
 
         $menus = Menu::all();
-        return view('c-panel.menus.index',compact('menus'));
+        return view('c-panel.menus.index', compact('menus'));
     }
 
 
     public function create()
     {
         $subMenus = SubMenu::all();
-        return view('c-panel.menus.create',compact('subMenus'));
+        return view('c-panel.menus.create', compact('subMenus'));
     }
 
 
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
-        $data = validator($request->all(), [
-            'name' => 'required',
-            'link' => 'required'
-        ]);
-        if (!$data->fails()) {
-            $menu = new Menu();
-            $menu->name = $request->name;
-            $menu->link = Websit::first()->url.'/'.$request->link;
-            $menu->save();
-            return redirect()->route('menus.index');
-        } else{
-            return dd('Error Validation');
-    }
-
-    }
-
-
-    public function show($id)
-    {
-        //
+        $menu = new Menu();
+        $menu->name = $request->name;
+        $menu->link = $request->link;
+        $menu->slug = $request->slug;
+        $menu->save();
+        return redirect()->route('menus.index');
     }
 
 
     public function edit(Menu $menu)
     {
         $subMenus = SubMenu::all();
-        if (Websit::first()->url != null){
+        if (Websit::first()->url != null) {
             Websit::first()->url = null;
-        }else{
+        } else {
             dd('Not Have');
         }
-        return view('c-panel.menus.edit',['menu'=>$menu,'subMenus'=>$subMenus]);
+        return view('c-panel.menus.edit', ['menu' => $menu, 'subMenus' => $subMenus]);
     }
 
     public function update(MenuRequest $request, Menu $menu)
     {
         $data = $request->validated();
 //        dd(Websit::first()->url.'/'.$request->link);
-        $data['link'] = Websit::first()->url.'/'.$request->link;
+//        $data['link'] = Websit::first()->url . '/' . $request->link;
         $menu->update($data);
-        return redirect()->route('menus.index')->with('success','Menu Updated Successfully!');
+        return redirect()->route('menus.index')->with('success', 'Menu Updated Successfully!');
     }
 
     public function destroy(Menu $menu)
     {
         $menu->delete();
-        return redirect()->back()->with('success','Menu Deleted Successfully');
+        return redirect()->back()->with('success', 'Menu Deleted Successfully');
         //
     }
 }

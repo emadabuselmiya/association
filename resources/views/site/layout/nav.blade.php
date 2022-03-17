@@ -18,11 +18,11 @@
                         <div class="d-flex mr-mr-2">
                             <a href="#" class="d-flex align-items-center ml-4">
                                 <span class="icon-envelope ml-2"></span>
-                                <span class="d-none d-md-inline-block">info@domain.com</span>
+                                <span class="d-none d-md-inline-block">{{ App\Models\Websit::latest()->first()->email  }}</span>
                             </a>
                             <a href="#" class="d-flex align-items-center ml-4">
                                 <span class="icon-phone ml-2"></span>
-                                <span class="d-none d-md-inline-block" dir="ltr">+96656541112
+                                <span class="d-none d-md-inline-block" dir="ltr">{{ App\Models\Websit::latest()->first()->email  }}
                     </span>
                             </a>
                         </div>
@@ -44,8 +44,8 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-2">
-                        <h1 class="my-0 site-logo"><a href="index.html"><img
-                                    src="site/images/Group 24.png" width="200px" alt=""></a></h1>
+                        <h1 class="my-0 site-logo"><a href="{{ route('site.home') }}"><img
+                                    src="{{ asset('storage/' . App\Models\Websit::latest()->first()->logo) }}" width="200px" alt=""></a></h1>
                     </div>
                     <div class="col-10">
                         <nav class="site-navigation text-right" role="navigation">
@@ -94,24 +94,7 @@
             </div>
         </div>
     </div>
-
-
-    <div class="hero" style="background-image: linear-gradient(90deg, rgb(43
-        123 145 / 90%) 0%, rgb(8 204 127 / 66%) 100%),
-        url(/site/images/banner-bg5.jpg)">
-        <div class="text-center align-bottom hero-items">
-            <h1 class="hero_title">طريقـك نحو الخيـر</h1>
-            <h5 class="hero_sub_title">بالمساهمة في دعم المشاريع الخيرية</h5>
-            <p class="hero_pargraph"> تجربة خط هذا النص هو مثال لنص يمكن أن يستبدل
-                في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى
-                حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى
-                زيادة عــدد الحروف التى يولـدها التطبــيق.
-                إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى </p>
-            <button class="btn btn-primary btn-of-share-us" type="submit">شاركنا
-                الاجر
-            </button>
-
-        </div>
-    </div>
-
 </section>
+
+
+

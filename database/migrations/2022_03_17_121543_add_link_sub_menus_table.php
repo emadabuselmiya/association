@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class AddLinkSubMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
+        Schema::table('sub_menus', function (Blueprint $table) {
             $table->string('link')->nullable();
-            $table->timestamps();
+            $table->string('slug')->nullable()->unique();
         });
     }
 
@@ -28,6 +26,9 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::table('sub_menus', function (Blueprint $table) {
+            $table->dropColumn('link');
+            $table->dropColumn('slug');
+        });
     }
 }

@@ -177,6 +177,10 @@
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('All Pages') }}</span></a>
                     </li>
+                    <li><a class="d-flex align-items-center" href="{{ route('static.index') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('Static Pages') }}</span></a>
+                    </li>
                     <li><a class="d-flex align-items-center" href="{{ route('pages.create') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('Create Page') }}</span></a>

@@ -38,6 +38,7 @@ class WebsitController extends Controller
         if(!$websit){
             $request->validate([
                 'websit_title' => 'required |string',
+                'address' => 'string | max:255',
                 'favicon_image' => 'image |required |mimes:png',
                 'logo' => 'image |required |mimes:png',
                 'email' => 'required |email |unique:websits',
@@ -72,6 +73,7 @@ class WebsitController extends Controller
         }else{
             $request->validate([
                 'websit_title' => 'required |string',
+                'address' => 'string | max:255',
                 'favicon_image' => 'image |mimes:png',
                 'logo' => 'image |mimes:png',
                 'email' => ['required','email', "unique:websits,email,".$websit->id],

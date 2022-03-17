@@ -47,22 +47,22 @@
                                 </div>
                                 {{-- end main image --}}
 
-                                {{-- Select Client --}}
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group fallback w-100">
-                                        <div class="form-group">
-                                            <label for="client_id" class="form-label">{{ __('Client Name') }}</label>
+{{--                                --}}{{-- Select Client --}}
+{{--                                <div class="col-lg-12 col-md-12 col-sm-12">--}}
+{{--                                    <div class="form-group fallback w-100">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="client_id" class="form-label">{{ __('Client Name') }}</label>--}}
 
-                                            <select name="client_id" id="client_id" class="form-control">
-                                                @foreach (App\Models\Client::all() as $client)
-                                                    <option @if ($client->id == old('client_id')) selected @endif
-                                                        value="{{ $client->id }}">{{ $client->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- end Select Client --}}
+{{--                                            <select name="client_id" id="client_id" class="form-control">--}}
+{{--                                                @foreach (App\Models\Client::all() as $client)--}}
+{{--                                                    <option @if ($client->id == old('client_id')) selected @endif--}}
+{{--                                                        value="{{ $client->id }}">{{ $client->name }}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                --}}{{-- end Select Client --}}
 
                                 {{-- Select Service --}}
                                 <div class="col-lg-12 col-md-12 col-sm-12">

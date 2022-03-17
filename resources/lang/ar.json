@@ -258,5 +258,8 @@
     "Sub-Menu name" : "اسم القائمة الفرعية",
     "Sub Title Page" : "العنوان الفرعي للصفحة",
     "Page Details" : "تفاصيل الصفحة",
-    "View Contact" : "عرض بيانات الرسالة"
+    "View Contact" : "عرض بيانات الرسالة",
+    "Website Address" : "العنوان",
+    "Static Pages" : "الصفحات الثابتة",
+    "Parent" : "القائمة الرئيسية"
 }

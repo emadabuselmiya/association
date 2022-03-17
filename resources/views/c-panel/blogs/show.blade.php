@@ -1,4 +1,4 @@
-@extends('layouts.c-panel')
+@extends('layout.app')
 
 @section('content')
 

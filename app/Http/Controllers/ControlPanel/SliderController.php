@@ -26,9 +26,9 @@ class SliderController extends Controller
                     return '<img src="' . asset('storage/' . $slider->image) . '" width="50" alt="' . $slider->title . '">';
                 })
                 ->addColumn('actions', function (Slider $slider) {
-                    $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $slider->id . '">' .
+                    $delete = '<a href="#" class="btn btn-danger btn-sm m-1" data-toggle= "modal" data-target= "#modals-delete-' . $slider->id . '">' .
                         'حذف</a>';
-                    $edit = ' <a href="' . route('sliders.edit', $slider->id) . '" class="btn btn-sm btn-primary">تعديل</a>';
+                    $edit = ' <a href="' . route('sliders.edit', $slider->id) . '" class="btn btn-sm btn-primary m-1">تعديل</a>';
 
                     return $delete . $edit;
 

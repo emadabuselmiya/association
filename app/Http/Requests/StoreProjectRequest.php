@@ -26,7 +26,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => 'required |max:150',
             'main_image' => 'nullable |image |mimes:png,jpg',
-            'client_id' => 'required |exists:clients,id',
+//            'client_id' => 'required |exists:clients,id',
             'service_id' => 'required |exists:services,id',
             'gallery' => 'nullable |array ',
             'during_date' => 'nullable |date'

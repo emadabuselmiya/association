@@ -13,9 +13,8 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Throwable;
 
-class PageController extends Controller
+class StaticPagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,24 +24,23 @@ class PageController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $pages = Page::where('status', 0)->get();
+            $pages = Page::where('status', 1)->get();
             return datatables()->of($pages)
                 ->editColumn('main_image', function (Page $page) {
                     return '<img src="' . asset('storage/' . $page->main_image) . '" width="50" alt="' . $page->title . '">';
                 })
                 ->addColumn('actions', function (Page $page) {
-                    $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $page->id . '">' .
-                        'حذف</a>';
+
                     $edit = ' <a href="' . route('pages.edit', $page->id) . '" class="btn btn-sm btn-primary">تعديل</a>';
                     $show = ' <a href="' . route('pages.show', $page->id) . '" class="btn btn-sm btn-success">عرض</a>';
 
-                    return $delete . $edit . $show;
+                    return $edit . $show;
 
                 })
                 ->rawColumns(['actions', 'main_image'])
                 ->make(true);
         }
-        $pages = Page::where('status', 0)->get();
+        $pages = Page::where('status', 1)->get();
         return view('c-panel.pages.index', [
             'pages' => $pages,
         ]);
@@ -104,7 +102,7 @@ class PageController extends Controller
             return $e;
         }
 
-        return redirect()->route('pages.index')->with('success', __('Page ') . $page->name . __(' Created Done!'));
+        return redirect()->route('static.index')->with('success', __('Page ') . $page->name . __(' Created Done!'));
     }
 
     /**
@@ -190,26 +188,8 @@ class PageController extends Controller
                 ->with('error', 'Operation failed');
         }
 
-        return redirect()->route('pages.index')->with('success', __('Page ') . $page->name . __(' Updated Done!'));
+        return redirect()->route('static.index')->with('success', __('Page ') . $page->name . __(' Updated Done!'));
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Page $page)
-    {
-        foreach ($page->images as $gallery) {
-            Storage::disk('public')->delete($gallery->image);
-            $gallery->delete();
-        }
-
-        Storage::disk('public')->delete($page->main_image);
-        $page->delete();
-        return redirect()->route('pages.index')->with('success', __('Page Deleted Done!'));
     }
 
     protected function insertTags($tags, $page)

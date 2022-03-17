@@ -15,6 +15,9 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
+<link rel="apple-touch-icon" href="{{ asset('storage/' . App\Models\Websit::latest()->first()->favicon_image ?? 'app-assets/images/ico/apple-icon-120.png') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/' . App\Models\Websit::latest()->first()->favicon_image ?? 'app-assets/images/ico/apple-icon-120.png') }}">
+
 <link rel="stylesheet" href="{{asset('site/fonts/icomoon/style.css')}}">
 <link rel="stylesheet" href="{{asset('site/css/hover.css')}}">
 <link rel="stylesheet" href="{{asset('site/vendor/aos/aos.min.css')}}">
