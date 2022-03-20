@@ -30,6 +30,8 @@ class UpdatePageRequest extends FormRequest
             'gallery' => 'nullable |array ',
             'description' => 'nullable',
             'tags' => 'nullable |string',
+            'menu_id' => 'required',
+
         ];
     }
 }

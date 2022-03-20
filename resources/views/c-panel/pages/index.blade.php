@@ -39,16 +39,6 @@
         <div class="content-body">
             <!-- users list start -->
             <section class="app-user-list">
-                <!-- users filter start -->
-                <div class="card">
-                    <h5 class="card-header">تصفية البيانات</h5>
-                    <div class="d-flex justify-content-between align-items-center mx-50 row pt-0 pb-2">
-                        <div class="col-md-4 user_role"></div>
-                        <div class="col-md-4 user_plan"></div>
-                        <div class="col-md-4 user_status"></div>
-                    </div>
-                </div>
-                <!-- users filter end -->
                 <!-- list section start -->
                 <div class="card">
                     <div class="card-datatable table-responsive pt-0">
@@ -56,9 +46,11 @@
                         <table class="page-list-table table">
                             <thead class="thead-light">
                             <tr>
-                                <th style="text-align: center;">{{ __('Main Image') }}</th>
+                                <th>#</th>
+                                <th>{{ __('Main Image') }}</th>
                                 <th>{{ __('Title') }}</th>
                                 <th>{{ __('Sub Title') }}</th>
+                                <th>{{ __('Menu') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                             </thead>

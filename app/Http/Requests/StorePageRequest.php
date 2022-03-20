@@ -26,6 +26,7 @@ class StorePageRequest extends FormRequest
         return [
             'title' => 'required |max:150',
             'main_image' => 'required |image |mimes:png,jpg',
+            'menu_id' => 'required',
             'sub_title' => 'nullable |string',
             'gallery' => 'nullable |array ',
             'description' => 'nullable',

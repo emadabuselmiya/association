@@ -39,14 +39,28 @@
                                     </div>
                                 </div>
                                 {{-- end project title --}}
-
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <label for="title" class="form-label">{{ __('Slug') }}</label>
-                                        <input type="text" class="form-control" id="slug" name="slug"
-                                               value="{{ old('slug',$menu->slug) }}" required autofocus>
+                                        <label for="title" class="form-label">{{ __('Main Menu') }}</label>
+                                        <select name="parent_id" id="parent_id" class="form-control"
+                                                onchange="convertToSlug();">
+                                            <option value="0">لا يوجد</option>
+                                            @foreach ($menus as $item)
+                                                <option @if ($item->id == old('menu_id', $item->parent_id)) selected
+                                                        @endif
+                                                        value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+
+                                {{--                                <div class="col-lg-6 col-md-6 col-sm-6">--}}
+                                {{--                                    <div class="form-group">--}}
+                                {{--                                        <label for="title" class="form-label">{{ __('Slug') }}</label>--}}
+                                <input type="hidden" class="form-control" id="slug" name="slug"
+                                       value="{{ old('slug') }}" required autofocus>
+                                {{--                                    </div>--}}
+                                {{--                                </div>--}}
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
@@ -100,7 +114,7 @@
                 .replace(/\-\-+/g, '-')
                 .replace(/^-+/, '').replace(/-+$/, '');
 
-            var url = "{{ App\Models\Websit::first()->url }}" + "/" + t;
+            var url = "{{ App\Models\Websit::first()->url }}" + "/st/" + t;
 
             document.getElementById("link").value = url;
             document.getElementById("slug").value = t;

@@ -100,18 +100,20 @@
                         js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
                             <ul class="site-menu text-left t main-menu js-clone-nav d-none
                       d-lg-block">
-                                <li class=""><a href="#home-section" class="nav-link">عن الجمعية </a></li>
+                                <li class=""><a href="/#home-section" class="nav-link">عن الجمعية </a></li>
+
                                 @foreach($menus as $menu)
-                                    <li @if(count($menu->subMenus) != 0) class="has-children" @endif>
-                                        <a href="@if(count($menu->subMenus) == 0) {{ route('site.view-page', $menu->slug) }} @else javascript:void(0); @endif"
+                                    <li @if(count($menu->child) != 0) class="has-children" @endif>
+
+                                        <a href="@if(count($menu->child) == 0) {{ $menu->link }} @else javascript:void(0); @endif"
                                            class="nav-link">{{ $menu->name }}</a>
 
-                                        @if(count($menu->subMenus) != 0)
+                                        @if(count($menu->child) != 0)
                                             <ul class="dropdown arrow-top">
-                                                @foreach($menu->subMenus as $sub_menu)
+                                                @foreach($menu->child as $child)
                                                     <li>
-                                                        <a href="{{ route('site.view-page',$sub_menu->slug) }}"
-                                                           class="nav-link">{{ $sub_menu->name }}</a></li>
+                                                        <a href="{{ $child->link }}"
+                                                           class="nav-link">{{ $child->name }}</a></li>
 
                                                 @endforeach
                                             </ul>
@@ -333,7 +335,7 @@
 {{--                            <li><i class="fa-solid fa-angle-left"></i> <a href="">اخبار--}}
 {{--                                    الجمعية</a></li>--}}
                             @foreach($menus as $menu)
-                                <li><i class="fa-solid fa-angle-left"></i> <a href="{{ route('site.view-page', $menu->slug) }}">{{ $menu->name }}</a></li>
+                                <li><i class="fa-solid fa-angle-left"></i> <a href="{{ $menu->link }}">{{ $menu->name }}</a></li>
                             @endforeach
 
 

@@ -42,7 +42,7 @@ Route::group([
     'as' => 'site.',
 ], function () {
     Route::get('/', [SiteController::class, 'index'])->name('home');
-    Route::get('/{slug}', [SiteController::class, 'view_page'])->name('view-page');
+    Route::get('/st/{slug}', [SiteController::class, 'view_page'])->name('view-page');
 
 });
 
@@ -51,7 +51,7 @@ Route::group([
 Route::middleware('auth')
     ->prefix('c-panel')
     ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('users', [UserController::class, 'index'])->name('all-users');
         Route::get('users/create', [UserController::class, 'create'])->name('create-users');

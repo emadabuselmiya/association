@@ -41,7 +41,7 @@ class StaticPagesController extends Controller
                 ->make(true);
         }
         $pages = Page::where('status', 1)->get();
-        return view('c-panel.pages.index', [
+        return view('c-panel.pages.static.index', [
             'pages' => $pages,
         ]);
     }

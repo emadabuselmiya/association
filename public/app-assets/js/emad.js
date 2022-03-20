@@ -524,8 +524,10 @@ $(function () {
             }, // JSON file to add data
             columns: [
                 // columns according to JSON
+                {data: 'DT_RowIndex'},
                 {data: 'name'},
                 {data: 'link'},
+                {data: 'parent'},
                 {data: 'actions', orderable: false}
             ],
             columnDefs: [
@@ -559,38 +561,6 @@ $(function () {
             },
             // Buttons with Dropdown
             buttons: [
-                {
-                    extend: 'collection',
-                    className: 'btn btn-outline-secondary dropdown-toggle mr-2 mt-50',
-                    text: feather.icons['share'].toSvg({class: 'font-small-4 mr-50'}) + 'تصدير',
-                    buttons: [
-                        {
-                            extend: 'print',
-                            text: feather.icons['printer'].toSvg({class: 'font-small-4 mr-50'}) + 'طباعة',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1]}
-                        },
-                        {
-                            extend: 'excel',
-                            text: feather.icons['file'].toSvg({class: 'font-small-4 mr-50'}) + 'اكسل',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1]}
-                        },
-                        {
-                            extend: 'pdf',
-                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 mr-50'}) + 'Pdf',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1]}
-                        }
-                    ],
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                        $(node).parent().removeClass('btn-group');
-                        setTimeout(function () {
-                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex');
-                        }, 50);
-                    },
-                },
                 {
                     text: 'اضافة جديد',
                     className: 'add-new btn btn-primary mt-50',
@@ -968,9 +938,11 @@ $(function () {
             }, // JSON file to add data
             columns: [
                 // columns according to JSON
+                {data: 'DT_RowIndex'},
                 {data: 'main_image', orderable: false},
                 {data: 'title'},
                 {data: 'sub_title'},
+                {data: 'menu'},
                 {data: 'actions', orderable: false}
             ],
 
@@ -996,38 +968,6 @@ $(function () {
             },
             // Buttons with Dropdown
             buttons: [
-                {
-                    extend: 'collection',
-                    className: 'btn btn-outline-secondary dropdown-toggle mr-2 mt-50',
-                    text: feather.icons['share'].toSvg({class: 'font-small-4 mr-50'}) + 'تصدير',
-                    buttons: [
-                        {
-                            extend: 'print',
-                            text: feather.icons['printer'].toSvg({class: 'font-small-4 mr-50'}) + 'طباعة',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        },
-                        {
-                            extend: 'excel',
-                            text: feather.icons['file'].toSvg({class: 'font-small-4 mr-50'}) + 'اكسل',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        },
-                        {
-                            extend: 'pdf',
-                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 mr-50'}) + 'Pdf',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        }
-                    ],
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                        $(node).parent().removeClass('btn-group');
-                        setTimeout(function () {
-                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex');
-                        }, 50);
-                    },
-                },
                 {
                     text: 'اضافة جديد',
                     className: 'add-new btn btn-primary mt-50',
@@ -1083,38 +1023,6 @@ $(function () {
             },
             // Buttons with Dropdown
             buttons: [
-                {
-                    extend: 'collection',
-                    className: 'btn btn-outline-secondary dropdown-toggle mr-2 mt-50',
-                    text: feather.icons['share'].toSvg({class: 'font-small-4 mr-50'}) + 'تصدير',
-                    buttons: [
-                        {
-                            extend: 'print',
-                            text: feather.icons['printer'].toSvg({class: 'font-small-4 mr-50'}) + 'طباعة',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        },
-                        {
-                            extend: 'excel',
-                            text: feather.icons['file'].toSvg({class: 'font-small-4 mr-50'}) + 'اكسل',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        },
-                        {
-                            extend: 'pdf',
-                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 mr-50'}) + 'Pdf',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        }
-                    ],
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                        $(node).parent().removeClass('btn-group');
-                        setTimeout(function () {
-                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex');
-                        }, 50);
-                    },
-                },
                 {
                     text: 'اضافة جديد',
                     className: 'add-new btn btn-primary mt-50',
@@ -1184,12 +1092,6 @@ $(function () {
                         {
                             extend: 'excel',
                             text: feather.icons['file'].toSvg({class: 'font-small-4 mr-50'}) + 'اكسل',
-                            className: 'dropdown-item',
-                            exportOptions: {columns: [0, 1, 2]}
-                        },
-                        {
-                            extend: 'pdf',
-                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 mr-50'}) + 'Pdf',
                             className: 'dropdown-item',
                             exportOptions: {columns: [0, 1, 2]}
                         }

@@ -21,6 +21,9 @@ class MenuController extends Controller
         if ($request->ajax()) {
             $menus = Menu::all();
             return datatables()->of($menus)
+                ->addColumn('parent', function (Menu $menu) {
+                    return $menu->parent->name ?? 'رئيسي';
+                })
                 ->addColumn('actions', function (Menu $menu) {
                     $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $menu->id . '">' .
                         'حذف</a>';
@@ -30,6 +33,7 @@ class MenuController extends Controller
 
                 })
                 ->rawColumns(['actions', 'image'])
+                ->addIndexColumn()
                 ->make(true);
         }
 
@@ -40,39 +44,46 @@ class MenuController extends Controller
 
     public function create()
     {
-        $subMenus = SubMenu::all();
-        return view('c-panel.menus.create', compact('subMenus'));
+        $menus = Menu::where('parent_id', 0)->get();
+
+        return view('c-panel.menus.create', [
+            'menus' => $menus
+        ]);
     }
 
 
-    public function store(MenuRequest $request)
+    public function store(Request $request)
     {
-        $menu = new Menu();
-        $menu->name = $request->name;
-        $menu->link = $request->link;
-        $menu->slug = $request->slug;
-        $menu->save();
-        return redirect()->route('menus.index');
+        $request->validate([
+            'name' => 'required|string',
+            'link' => 'required|string',
+            'slug' => 'required|string|unique:menus,slug',
+            'parent_id' => 'required',
+        ]);
+        Menu::create($request->all());
+
+        return redirect()->route('menus.index')->with('success', 'Menu Created Successfully!');
     }
 
 
     public function edit(Menu $menu)
     {
-        $subMenus = SubMenu::all();
-        if (Websit::first()->url != null) {
-            Websit::first()->url = null;
-        } else {
-            dd('Not Have');
-        }
-        return view('c-panel.menus.edit', ['menu' => $menu, 'subMenus' => $subMenus]);
+        $menus = Menu::where('parent_id', 0)->get();
+        return view('c-panel.menus.edit', [
+            'menu' => $menu,
+            'menus' => $menus,
+        ]);
     }
 
-    public function update(MenuRequest $request, Menu $menu)
+    public function update(Request $request, Menu $menu)
     {
-        $data = $request->validated();
-//        dd(Websit::first()->url.'/'.$request->link);
-//        $data['link'] = Websit::first()->url . '/' . $request->link;
-        $menu->update($data);
+        $request->validate([
+            'name' => 'required|string',
+            'link' => 'required|url|string',
+            'slug' => "required|string|unique:menus,slug, $menu->id",
+        ]);
+
+        $menu->update($request->all());
         return redirect()->route('menus.index')->with('success', 'Menu Updated Successfully!');
     }
 
@@ -80,6 +91,5 @@ class MenuController extends Controller
     {
         $menu->delete();
         return redirect()->back()->with('success', 'Menu Deleted Successfully');
-        //
     }
 }

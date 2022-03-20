@@ -41,6 +41,7 @@ class UserController extends Controller
 
                 })
                 ->rawColumns(['actions'])
+                ->addIndexColumn()
                 ->make(true);
         }
         $users = User::all();

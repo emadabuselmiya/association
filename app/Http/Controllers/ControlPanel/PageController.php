@@ -30,6 +30,9 @@ class PageController extends Controller
                 ->editColumn('main_image', function (Page $page) {
                     return '<img src="' . asset('storage/' . $page->main_image) . '" width="50" alt="' . $page->title . '">';
                 })
+                ->addColumn('menu', function (Page $page) {
+                    return $page->menu->name ?? 'لا يوجد';
+                })
                 ->addColumn('actions', function (Page $page) {
                     $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $page->id . '">' .
                         'حذف</a>';
@@ -40,6 +43,7 @@ class PageController extends Controller
 
                 })
                 ->rawColumns(['actions', 'main_image'])
+                ->addIndexColumn()
                 ->make(true);
         }
         $pages = Page::where('status', 0)->get();
@@ -55,10 +59,16 @@ class PageController extends Controller
      */
     public function create()
     {
-        $menus = Menu::all();
+        $menus = [];
+        foreach (Menu::all() as $menu) {
+            if ($menu->pages()->first() == null && count($menu->child) == 0) {
+                $menus[] = $menu;
+            }
+        }
 
-//        dd(Menu::has('subMenus')->get());
-        return view('c-panel.pages.create', ['menus' => $menus]);
+        return view('c-panel.pages.create', [
+            'menus' => $menus
+        ]);
     }
 
     /**
@@ -70,7 +80,6 @@ class PageController extends Controller
     public function store(StorePageRequest $request)
     {
         $data = $request->validated();
-
         $image = null;
 
 //        dd($data);
@@ -128,7 +137,13 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        $menus = Menu::all();
+        $menus = [];
+        foreach (Menu::all() as $menu) {
+            if ($menu->pages()->first() == null && count($menu->child) == 0) {
+                $menus[] = $menu;
+            }
+        }
+        $menus [] = Menu::findOrFail($page->menu_id);
         $tags = $page->tags()->pluck('name')->toArray();
         $tags = implode(', ', $tags);
 

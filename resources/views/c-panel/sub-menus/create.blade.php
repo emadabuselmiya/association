@@ -115,7 +115,7 @@
                 .replace(/^-+/, '').replace(/-+$/, '');
 
             if (url != "") {
-                var url = "{{ App\Models\Websit::first()->url }}" + "/" + t;
+                var url = "{{ App\Models\Websit::first()->url }}" + "/st/" + t;
 
                 document.getElementById("link").value = url;
                 document.getElementById("slug").value = t;

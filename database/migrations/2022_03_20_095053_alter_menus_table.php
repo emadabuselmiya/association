@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugMenusTable extends Migration
+class AlterMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddSlugMenusTable extends Migration
     public function up()
     {
         Schema::table('menus', function (Blueprint $table) {
+            $table->foreignId('parent_id')->constrained('menus')->cascadeOnDelete();
             $table->string('slug')->nullable()->unique();
-
         });
     }
 
@@ -28,6 +28,7 @@ class AddSlugMenusTable extends Migration
     {
         Schema::table('menus', function (Blueprint $table) {
             $table->dropColumn('slug');
+            $table->dropColumn('parent_id');
         });
     }
 }

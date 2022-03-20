@@ -47,8 +47,10 @@
                         <table class="menu-list-table table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th style="text-align: center;">{{ __('Name') }}</th>
+                                    <th>#</th>
+                                    <th>{{ __('Name') }}</th>
                                     <th>{{ __('Link') }}</th>
+                                    <th>{{ __('Main Menu') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                             </thead>
@@ -108,9 +110,7 @@
 
 
     <!-- BEGIN: Page JS-->
-    <script src="{{ asset('app-assets/js/emad.js') }}"></script>
-    {{-- <script src="{{asset('app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script> --}}
-    {{-- <script src="{{asset('app-assets/js/datatables.js')}}"></script> --}}
+    <script src="{{ asset('app-assets/js/emad.js') }}?<?php time() ?>"></script>
     <!-- END: Page JS-->
 
 @stop

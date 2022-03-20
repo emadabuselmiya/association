@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('title')
-    {{ __('Create Menus') }}
+    {{ __('Create Menu') }}
 @stop
 
 
@@ -11,7 +11,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">{{ __('Create Menus') }}</h2>
+                        <h2 class="content-header-title float-left mb-0">{{ __('Create Menu') }}</h2>
                     </div>
                 </div>
             </div>
@@ -37,11 +37,24 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <label for="title" class="form-label">{{ __('Slug') }}</label>
-                                        <input type="text" class="form-control" id="slug" name="slug"
-                                               value="{{ old('slug') }}" required autofocus>
+                                        <label for="title" class="form-label">{{ __('Main Menu') }}</label>
+                                        <select name="parent_id" id="parent_id" class="form-control"
+                                                onchange="convertToSlug();">
+                                            <option value="0"></option>
+                                            @foreach ($menus as $menu)
+                                                <option @if ($menu->id == old('menu_id')) selected @endif
+                                                value="{{ $menu->id }}">{{ $menu->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+{{--                                <div class="col-lg-6 col-md-6 col-sm-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="title" class="form-label">{{ __('Slug') }}</label>--}}
+                                        <input type="hidden" class="form-control" id="slug" name="slug"
+                                               value="{{ old('slug') }}" required autofocus>
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 {{-- end project title --}}
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
@@ -97,7 +110,7 @@
                 .replace(/^-+/, '').replace(/-+$/, '');
 
             if (url != "") {
-                var url = "{{ App\Models\Websit::first()->url }}" + "/" + t;
+                var url = "{{ App\Models\Websit::first()->url }}" + "/st/" + t;
 
                 document.getElementById("link").value = url;
                 document.getElementById("slug").value = t;

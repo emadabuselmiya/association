@@ -27,56 +27,6 @@
                                                       data-i18n="order">{{ __('Dashboard') }}</span></a>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="users"></i><span class="menu-title text-truncate"
-                                                       data-i18n="order">{{ __('Users') }}</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('all-users') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Users') }}</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('create-users') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Create Users') }}</span></a>
-                    </li>
-
-
-                </ul>
-            </li>
-
-            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="user"></i><span class="menu-title text-truncate"
-                                                      data-i18n="order">{{ __('Clients') }}</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('clients.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Clients') }}</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('clients.create') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Create Clients') }}</span></a>
-                    </li>
-
-
-                </ul>
-            </li>
-
-            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="grid"></i><span class="menu-title text-truncate"
-                                                      data-i18n="order">{{ __('Specialty') }}</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('specialties.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Specialties') }}</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('specialties.create') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Create Specialties') }}</span></a>
-                    </li>
-
-
-                </ul>
-            </li>
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
                         data-feather="layers"></i><span class="menu-title text-truncate"
@@ -98,24 +48,26 @@
 
                 </ul>
             </li>
-
             <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="menu"></i><span class="menu-title text-truncate"
-                                                      data-i18n="order">{{ __('Menus') }}</span></a>
+                        data-feather="clipboard"></i><span class="menu-title text-truncate"
+                                                           data-i18n="order">{{ __('Pages') }}</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('menus.index') }}"><i
+                    <li><a class="d-flex align-items-center" href="{{ route('pages.index') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Website Menus') }}</span></a>
+                                                                data-i18n="List">{{ __('All Pages') }}</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('sub-menus.index') }}"><i
+                    <li><a class="d-flex align-items-center" href="{{ route('static.index') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Sub-Menus') }}</span></a>
+                                                                data-i18n="List">{{ __('Static Pages') }}</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="{{ route('pages.create') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('Create Page') }}</span></a>
                     </li>
 
 
                 </ul>
             </li>
-
             <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
                         data-feather="image"></i><span class="menu-title text-truncate"
                                                        data-i18n="order">{{ __('Multi Media') }}</span></a>
@@ -144,46 +96,6 @@
                     <li><a class="d-flex align-items-center" href="{{ route('projects.create') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('Create Project') }}</span></a>
-                    </li>
-
-
-                </ul>
-            </li>
-
-            @if ($hosting = App\Models\Service::where('name', 'LIKE', 'Hosting')->first())
-
-                <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                            data-feather="server"></i><span class="menu-title text-truncate"
-                                                            data-i18n="order">{{ __('Hosting') }}</span></a>
-                    <ul class="menu-content">
-
-                        @foreach ($hosting->subServices as $sub_host)
-                            {{-- this element to view all services page --}}
-                            <li><a class="d-flex align-items-center" href="{{ route('plans.show', $sub_host->id) }}"><i
-                                        data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                        data-i18n="List">{{ $sub_host->name }}</span></a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
-
-            @endif
-
-            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="clipboard"></i><span class="menu-title text-truncate"
-                                                           data-i18n="order">{{ __('Pages') }}</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('pages.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Pages') }}</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('static.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Static Pages') }}</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('pages.create') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Create Page') }}</span></a>
                     </li>
 
 
@@ -270,6 +182,14 @@
                         data-feather="settings"></i><span class="menu-title text-truncate"
                                                           data-i18n="order">{{ __('Setting') }}</span></a>
                 <ul class="menu-content">
+                    <li><a class="d-flex align-items-center" href="{{ route('all-users') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('Users') }}</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="{{ route('menus.index') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('Menus') }}</span></a>
+                    </li>
                     <li><a class="d-flex align-items-center" href="{{ route('setting-website-edit') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('Website Setting') }}</span></a>
