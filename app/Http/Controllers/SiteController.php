@@ -213,8 +213,9 @@ class SiteController extends Controller
     public function post_details($id)
     {
         $new = Blog::findOrFail($id);
+        $new1 = Blog::where('id', $id + 1)->first();
+        $new2 = Blog::where('id', $id - 1)->first();
         $news = Blog::paginate(3);
-
 
         $menus = [];
         foreach (Menu::where('parent_id', 0)->get() as $menu) {
@@ -229,6 +230,8 @@ class SiteController extends Controller
 
         return view('site.postdetails', [
             'new' => $new,
+            'new1' => $new1,
+            'new2' => $new2,
             'news' => $news,
             'menus' => $menus,
         ]);
@@ -256,11 +259,11 @@ class SiteController extends Controller
     public function save_contact_us(Request $request)
     {
         $request->validate([
-           'name' => 'required|string|max:150',
-           'phone' => 'required|max:150',
-           'email' => 'required|email|max:150',
-           'subject' => 'required|string|max:255',
-           'message' => 'required|string',
+            'name' => 'required|string|max:150',
+            'phone' => 'required|max:150',
+            'email' => 'required|email|max:150',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
         ]);
 
         Contact::create($request->all());

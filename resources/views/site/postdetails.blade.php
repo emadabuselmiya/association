@@ -198,18 +198,21 @@
                             <h3 class="title_of_share">مشاركة الخبر</h3>
                         </div>
                         <div class="col-lg-2 col ">
-                            <a href="#" class=""><span class="icon-twitter"></span></a>
+                            <a href="http://twitter.com/share?url={{ route('site.news.show', $new->id) }}&text={{$new->title}}"
+                               target="_blank"><span class="icon-twitter"></span></a>
 
                         </div>
                         <div class="col-lg-2 col">
-                            <a href="#" class=""><span class="icon-instagram"></span></a>
+                            <a href="#" target="_blank"><span class="icon-instagram"></span></a>
                         </div>
                         <div class="col-lg-2 col">
-                            <a href="#" class=""><span class="icon-linkedin"></span></a>
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ route('site.news.show', $new->id) }}"
+                               target="_blank"><span class="icon-linkedin"></span></a>
 
                         </div>
                         <div class="col-lg-2 col">
-                            <a href="#" class=""><span class="icon-facebook"></span></a>
+                            <a href="http://www.facebook.com/sharer.php?u={{ route('site.news.show', $new->id) }}"
+                               target="_blank"><span class="icon-facebook"></span></a>
                         </div>
 
                     </div>
@@ -232,30 +235,40 @@
             </div>
         </div>
         <div class="row" data-aos="fade-up">
-            <div class="col-lg-6 text-right">
-                <ul class="row next_post">
-                    <li class="col-auto next_post_arrow"><a href=""><i class="fa-solid fa-angle-right"></i> الخبر التالي</a>
-                    </li>
+            @if($new1 != null)
+                <div class="col-lg-6 text-right">
+                    <ul class="row next_post">
+                        <li class="col-auto next_post_arrow"><a href="{{ route('site.news.show', $new1->id) }}"><i
+                                    class="fa-solid fa-angle-right"></i> الخبر
+                                التالي</a>
+                        </li>
 
-                    <li class="col-auto"><img src="/site/images/Mask Group 2.png" alt=""></li>
-                    <li class="col title_of_next_post">
-                        <h5><a href=""> عنوان الخبر يكتب هنا نص لعنوان الخبر نص تجريبي للعنوان الخاص بالخبر هنا</a></h5>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-6 text-right">
-                <ul class="row next_post">
+                        <li class="col-auto"><img src="{{ asset('storage/' . $new1->main_image) }}" alt=""></li>
+                        <li class="col title_of_next_post">
+                            <h5><a href="{{ route('site.news.show', $new1->id) }}">{{ $new1->title }}</a>
+                            </h5>
+                        </li>
+                    </ul>
+                </div>
+            @endif
+            @if($new2 != null)
+                <div class="col-lg-6 text-right">
+                    <ul class="row next_post">
 
-                    <li class="col-auto"><img src="/site/images/Mask Group 2.png" alt=""></li>
-                    <li class="col title_of_next_post">
+                        <li class="col-auto"><img src="{{ asset('storage/' . $new2->main_image) }}" alt=""></li>
+                        <li class="col title_of_next_post">
 
-                        <h5><a href=""> عنوان الخبر يكتب هنا نص لعنوان الخبر نص تجريبي للعنوان الخاص بالخبر هنا</a></h5>
-                    </li>
-                    <li class="col-auto next_post_arrow"><a href="">الخبر السابق <i class="fa-solid fa-angle-left"></i>
-                        </a></li>
+                            <h5><a href="{{ route('site.news.show', $new2->id) }}">{{ $new2->title }}</a>
+                            </h5>
+                        </li>
+                        <li class="col-auto next_post_arrow"><a href="{{ route('site.news.show', $new2->id) }}">الخبر
+                                السابق <i
+                                    class="fa-solid fa-angle-left"></i>
+                            </a></li>
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 </section>
