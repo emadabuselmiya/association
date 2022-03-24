@@ -25,8 +25,11 @@ class MenuController extends Controller
                     return $menu->parent->name ?? 'رئيسي';
                 })
                 ->addColumn('actions', function (Menu $menu) {
-                    $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $menu->id . '">' .
-                        'حذف</a>';
+                    $delete = '';
+                    if($menu->static != 1) {
+                        $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $menu->id . '">' .
+                            'حذف</a>';
+                    }
                     $edit = ' <a href="' . route('menus.edit', $menu->id) . '" class="btn btn-sm btn-primary">تعديل</a>';
 
                     return $delete . $edit;
@@ -79,8 +82,8 @@ class MenuController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'link' => 'required|url|string',
-            'slug' => "required|string|unique:menus,slug, $menu->id",
+            'link' => 'nullable|url|string',
+            'slug' => "nullable|string|unique:menus,slug, $menu->id",
         ]);
 
         $menu->update($request->all());

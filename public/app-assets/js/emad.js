@@ -27,6 +27,7 @@ $(function () {
         dtSliderTable = $('.slider-list-table'),
         dtContactTable = $('.contact-list-table'),
         dtOrderTable = $('.order-list-table'),
+        dtStatisticTable = $('.statistic-list-table'),
 
 
         statusJudgement = {
@@ -45,6 +46,7 @@ $(function () {
             }, // JSON file to add data
             columns: [
                 // columns according to JSON
+                {data: 'DT_RowIndex'},
                 {data: 'name'},
                 {data: 'email'},
                 {data: 'role'},
@@ -159,9 +161,10 @@ $(function () {
             }, // JSON file to add data
             columns: [
                 // columns according to JSON
+                {data: 'DT_RowIndex'},
                 {data: 'image', orderable: false},
                 {data: 'name'},
-                {data: 'client_url'},
+                {data: 'name_job'},
                 {data: 'actions', orderable: false}
             ],
 
@@ -226,6 +229,60 @@ $(function () {
                     attr: {
                         "type": "button",
                         "onclick": "location.href = '/c-panel/clients/create'",
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                    }
+
+                },
+            ],
+
+        });
+    }
+
+    if (dtStatisticTable.length) {
+        dtStatisticTable.DataTable({
+            "processing": true,
+            "serverSide": true,
+            ajax: {
+                url: '/c-panel/statistics'
+            }, // JSON file to add data
+            columns: [
+                // columns according to JSON
+                {data: 'DT_RowIndex'},
+                {data: 'name'},
+                {data: 'count', orderable: false},
+                {data: 'actions', orderable: false}
+            ],
+
+            order: [0, 'asc'],
+            dom:
+                '<"d-flex justify-content-between align-items-center header-actions mx-1 row mt-75"' +
+                '<"col-lg-12 col-xl-6" l>' +
+                '<"col-lg-12 col-xl-6 pl-xl-75 pl-0"<"dt-action-buttons text-xl-right text-lg-left text-md-right text-left d-flex align-items-center justify-content-lg-end align-items-center flex-sm-nowrap flex-wrap mr-1"<"mr-1"f>B>>' +
+                '>t' +
+                '<"d-flex justify-content-between mx-2 row mb-1"' +
+                '<"col-sm-12 col-md-6"i>' +
+                '<"col-sm-12 col-md-6"p>' +
+                '>',
+            language: {
+                sLengthMenu: 'Show _MENU_',
+                search: 'بحث',
+                searchPlaceholder: 'بحث..',
+                paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                }
+            },
+            // Buttons with Dropdown
+            buttons: [
+                {
+                    text: 'اضافة جديد',
+                    className: 'add-new btn btn-primary mt-50',
+                    attr: {
+                        'data-toggle': 'modal',
+                        'data-target': '#modals-create'
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -529,14 +586,6 @@ $(function () {
                 {data: 'link'},
                 {data: 'parent'},
                 {data: 'actions', orderable: false}
-            ],
-            columnDefs: [
-                {
-                    // Actions
-                    targets: 2,
-                    width: '300 px',
-                }
-
             ],
 
             order: [0, 'asc'],
@@ -1399,10 +1448,17 @@ $(function () {
                 {data: 'name'},
                 {data: 'email'},
                 {data: 'message'},
+                {data: 'subject'},
                 {data: 'date'},
                 {data: 'actions', orderable: false}
             ],
+            columnDefs: [
+                {
+                    targets: 3,
+                    width: '400px',
 
+                }
+            ],
             order: [0, 'desc'],
             dom:
                 '<"d-flex justify-content-between align-items-center header-actions mx-1 row mt-75"' +

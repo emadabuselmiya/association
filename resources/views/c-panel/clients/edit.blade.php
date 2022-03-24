@@ -29,7 +29,7 @@
 
                             <div class="row">
                                 {{-- client name --}}
-                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name" class="form-label">{{ __('Client Name') }}</label>
                                         <input type="text" class="form-control" id="name" name="name"
@@ -37,7 +37,14 @@
                                     </div>
                                 </div>
                                 {{-- end client name --}}
-
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group fallback w-100">
+                                        <label for="client_url" class="form-label">الاسم الوظيفي</label>
+                                        <input type="text" id="name_job" name="name_job"
+                                               value="{{ old('name_job',$client->name_job) }}" class="form-control"
+                                               data-default-file="" required>
+                                    </div>
+                                </div>
                                 {{-- client image --}}
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group fallback w-100">
@@ -52,16 +59,7 @@
                                 </div>
                                 {{-- end client image --}}
 
-                                {{-- client URL --}}
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group fallback w-100">
-                                        <label for="client_url" class="form-label">{{ __('Client URL') }}</label>
-                                        <input type="url" id="client_url" name="client_url"
-                                               value="{{ old('clientt_url',$client->client_url) }}" class="form-control"
-                                               data-default-file="" required>
-                                    </div>
-                                </div>
-                                {{-- end client URL --}}
+
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>

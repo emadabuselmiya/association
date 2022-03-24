@@ -21,10 +21,39 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-{{--            <li class="nav-label first">{{ __('Main Menu') }}</li>--}}
             <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('dashboard') }}"><i
                         data-feather="home"></i><span class="menu-title text-truncate"
                                                       data-i18n="order">{{ __('Dashboard') }}</span></a>
+            </li>
+
+            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
+                        data-feather="users"></i><span class="menu-title text-truncate"
+                                                      data-i18n="order">{{ __('Clients') }}</span></a>
+                <ul class="menu-content">
+                    <li><a class="d-flex align-items-center" href="{{ route('clients.index') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('All Clients') }}</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="{{ route('clients.create') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List">{{ __('Create Clients') }}</span></a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
+                        data-feather="pie-chart"></i><span class="menu-title text-truncate"
+                                                       data-i18n="order">إحصائيات</span></a>
+                <ul class="menu-content">
+                    <li><a class="d-flex align-items-center" href="{{ route('statistics.index') }}"><i
+                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                data-i18n="List"> كل الإحصائيات</span></a>
+                    </li>
+
+
+                </ul>
             </li>
 
 
@@ -36,10 +65,7 @@
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('All Services') }}</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('subservices.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Sub Services') }}</span></a>
-                    </li>
+
                     <li><a class="d-flex align-items-center" href="{{ route('services.create') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('Create Services') }}</span></a>
@@ -56,9 +82,9 @@
                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                                 data-i18n="List">{{ __('All Pages') }}</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('static.index') }}"><i
+                    <li><a class="d-flex align-items-center" href="{{ route('static.edit') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('Static Pages') }}</span></a>
+                                                                data-i18n="List">عن الجمعية</span></a>
                     </li>
                     <li><a class="d-flex align-items-center" href="{{ route('pages.create') }}"><i
                                 data-feather="circle"></i><span class="menu-item text-truncate"
@@ -153,17 +179,6 @@
                 </ul>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
-                        data-feather="align-justify"></i><span class="menu-title text-truncate"
-                                                               data-i18n="order">{{ __('Orders') }}</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('orders.index') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                data-i18n="List">{{ __('All Orders') }}</span></a>
-                    </li>
-
-                </ul>
-            </li>
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0);"><i
                         data-feather="headphones"></i><span class="menu-title text-truncate"

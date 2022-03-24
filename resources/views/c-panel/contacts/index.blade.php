@@ -49,6 +49,7 @@
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Email') }}</th>
                                     <th>{{ __('Message') }}</th>
+                                    <th>الموضوع</th>
                                     <th>{{ __('Date') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>

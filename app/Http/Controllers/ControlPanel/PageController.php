@@ -60,7 +60,7 @@ class PageController extends Controller
     public function create()
     {
         $menus = [];
-        foreach (Menu::all() as $menu) {
+        foreach (Menu::where('status', '<>', 1)->get() as $menu) {
             if ($menu->pages()->first() == null && count($menu->child) == 0) {
                 $menus[] = $menu;
             }

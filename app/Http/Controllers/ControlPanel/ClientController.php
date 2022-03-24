@@ -27,7 +27,6 @@ class ClientController extends Controller
                     return '<img src="' . asset('storage/' . $client->image) . '" width="50" alt="' . $client->name . '">';
                 })
                 ->addColumn('actions', function (Client $client) {
-                    $delete = '';
                     $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $client->id . '">' .
                         'حذف</a>';
                     $edit = ' <a href="' . route('clients.edit', $client->id) . '" class="btn btn-sm btn-primary">تعديل</a>';
@@ -36,6 +35,7 @@ class ClientController extends Controller
 
                 })
                 ->rawColumns(['actions', 'image'])
+                ->addIndexColumn()
                 ->make(true);
         }
         $clients = Client::all();

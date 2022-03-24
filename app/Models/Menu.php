@@ -9,7 +9,7 @@ class Menu extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'link', 'slug', 'parent_id'];
+    protected $fillable = ['name', 'link', 'slug', 'parent_id', 'static'];
 
     public function pages()
     {

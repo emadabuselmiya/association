@@ -26,7 +26,7 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required |string |max:150',
             'image' => 'nullable |image |mimes:png,jpg',
-            'client_url' => 'required |url'
+            'name_job' => 'required |string |max:150'
         ];
     }
 }

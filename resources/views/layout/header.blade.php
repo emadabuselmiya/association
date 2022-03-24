@@ -32,5 +32,6 @@
 <!-- END: Custom CSS-->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/tagsinput/bootstrap-tagsinput.css') }}">
+@toastr_css
 
 @yield('css','')

@@ -38,27 +38,29 @@
                                                value="{{ old('name',$menu->name)  }}" required autofocus>
                                     </div>
                                 </div>
-                                {{-- end project title --}}
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="title" class="form-label">{{ __('Main Menu') }}</label>
-                                        <select name="parent_id" id="parent_id" class="form-control"
-                                                onchange="convertToSlug();">
-                                            <option value="0">لا يوجد</option>
-                                            @foreach ($menus as $item)
-                                                <option @if ($item->id == old('menu_id', $item->parent_id)) selected
-                                                        @endif
-                                                        value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
+                                @if($menu->static != 1)
+                                    {{-- end project title --}}
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="title" class="form-label">{{ __('Main Menu') }}</label>
+                                            <select name="parent_id" id="parent_id" class="form-control"
+                                                    onchange="convertToSlug();">
+                                                <option value="0">لا يوجد</option>
+                                                @foreach ($menus as $item)
+                                                    <option @if ($item->id == old('menu_id', $menu->parent_id)) selected
+                                                            @endif
+                                                            value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{--                                <div class="col-lg-6 col-md-6 col-sm-6">--}}
-                                {{--                                    <div class="form-group">--}}
-                                {{--                                        <label for="title" class="form-label">{{ __('Slug') }}</label>--}}
+                                    {{--                                <div class="col-lg-6 col-md-6 col-sm-6">--}}
+                                    {{--                                    <div class="form-group">--}}
+                                    {{--                                        <label for="title" class="form-label">{{ __('Slug') }}</label>--}}
+
                                 <input type="hidden" class="form-control" id="slug" name="slug"
-                                       value="{{ old('slug') }}" required autofocus>
+                                       value="{{ old('slug', $menu->slug) }}" required autofocus>
                                 {{--                                    </div>--}}
                                 {{--                                </div>--}}
 
@@ -75,6 +77,8 @@
                                     </a>
 
                                 </div>
+
+                                @endif
 
 
                                 {{-- project title --}}
@@ -97,14 +101,7 @@
 @endsection
 @section('js')
     <script>
-        $(window).on("load", function () {
-            var url = "{{ App\Models\Websit::first()->url }}";
-            console.log(url);
-            if (url == "") {
-                alert('يرجى إدخال رابط الموقع')
-            }
-        });
-
+        @if($menu->static != 1)
         function convertToSlug() {
             var Text = document.getElementById("name").value;
 
@@ -114,12 +111,14 @@
                 .replace(/\-\-+/g, '-')
                 .replace(/^-+/, '').replace(/-+$/, '');
 
-            var url = "{{ App\Models\Websit::first()->url }}" + "/st/" + t;
+            var url = "{{ App\Models\Websit::first()->url }}" + "/site/" + t;
 
             document.getElementById("link").value = url;
             document.getElementById("slug").value = t;
 
 
         }
+
+        @endif
     </script>
 @stop

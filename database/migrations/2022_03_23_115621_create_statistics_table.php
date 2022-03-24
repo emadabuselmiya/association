@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubServicesTable extends Migration
+class CreateStatisticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSubServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_services', function (Blueprint $table) {
+        Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+            $table->string('name')->nullable();
+            $table->integer('count')->default(0);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSubServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_services');
+        Schema::dropIfExists('statistics');
     }
 }

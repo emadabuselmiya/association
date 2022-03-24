@@ -97,9 +97,9 @@
                             alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                    {{--                    <a--}}
-                    {{--                        class="dropdown-item" href="{{route('admins.profile.index')}}"><i class="mr-50" data-feather="user"></i>--}}
-                    {{--                        الملف الشخصي</a>--}}
+                    <a class="dropdown-item" href="{{route('profile.index')}}">
+                        <i class="mr-50" data-feather="user"></i>
+                        الملف الشخصي</a>
 
                     <a class="dropdown-item" href="#" onclick="document.getElementById('logout').submit()">
                         <i class="mr-50" data-feather="power"></i> تسجيل الخروج</a>

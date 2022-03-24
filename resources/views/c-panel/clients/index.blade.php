@@ -30,7 +30,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">{{ __('المستخدمين') }}</h2>
+                        <h2 class="content-header-title float-left mb-0">{{ __('Clients') }}</h2>
 
                     </div>
                 </div>
@@ -47,9 +47,10 @@
                         <table class="client-list-table table">
                             <thead class="thead-light">
                             <tr>
-                                <th style="text-align: center;">{{ __('Image') }}</th>
+                                <th>#</th>
+                                <th>{{ __('Image') }}</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Client URL') }}</th>
+                                <th>الاسم الوظيفي</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                             </thead>

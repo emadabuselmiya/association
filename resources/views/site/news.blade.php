@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('site/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('site/css/style.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="{{asset('site/fonts/icomoon/style.css')}}">
     <link rel="stylesheet" href="{{asset('site/css/hover.css')}}">
     <link rel="stylesheet" href="{{asset('site/vendor/aos/aos.min.css')}}">
@@ -24,9 +28,15 @@
 
     <title>{{App\Models\Websit::latest()->first()->websit_title}}</title>
 
+    <style>
+        .pagination {
+            float: right;
+            margin-top: 10px;
+        }
+    </style>
+
 
 </head>
-
 <body>
 <!--start nav bar  -->
 <section class="nav " dir="rtl">
@@ -38,8 +48,7 @@
             </div>
         </div>
         <div class="site-mobile-menu-body"></div>
-    </div>
-    <!-- .site-mobile-menu -->
+    </div> <!-- .site-mobile-menu -->
 
 
     <div class="site-navbar-wrap">
@@ -85,12 +94,10 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-2">
-                        <h1 class="my-0 site-logo">
-                            <a href="{{ route('site.home') }}">
-                                <img src="{{ asset('storage/' . App\Models\Websit::latest()->first()->logo) }}"
-                                     width="200px" alt="{{App\Models\Websit::latest()->first()->websit_title}}">
-                            </a>
-                        </h1>
+                        <a href="{{ route('site.home') }}">
+                            <img src="{{ asset('storage/' . App\Models\Websit::latest()->first()->logo) }}"
+                                 width="200px" alt="{{App\Models\Websit::latest()->first()->websit_title}}">
+                        </a>
                     </div>
                     <div class="col-10">
                         <nav class="site-navigation text-right" role="navigation">
@@ -132,7 +139,7 @@
                                 @endforeach
                                 <li>
                                     <button class="btn btn-outline-more hvr-bounce-to-top"><a
-                                            href="#gallery-section" class="nav-link"></a>كيف
+                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف
                                         تدعمنا
                                     </button>
                                 </li>
@@ -146,15 +153,13 @@
         </div>
     </div>
 
-    <div class="hero" style="background-image: linear-gradient(90deg, rgb(43
+
+    <div class="hero_of_about" style="background-image: linear-gradient(90deg, rgb(43
         123 145 / 90%) 0%, rgb(8 204 127 / 66%) 100%),
-        url({{ asset('storage/' .  $slider->image) }})">
+        url(/site/images/banner-bg5.jpg)">
         <div class="text-center align-bottom hero-items">
-            <h1 class="hero_title">{{ $slider->title }}</h1>
-            <h5 class="hero_sub_title">{{ $slider->sub_title }}</h5>
-            <p class="hero_pargraph">{{ $slider->description }}</p>
-            <a href="{{ route('site.contact-us') }}" class="btn btn-primary btn-of-share-us" >شاركنا
-                الاجر</a>
+            <h1 class="hero_title">أخبار الجمعية </h1>
+            <h5 class="hero_sub_title">الرئيسية / أخبار الجمعية </h5>
 
 
         </div>
@@ -163,176 +168,113 @@
 </section>
 
 <!-- end nav bar -->
-<!-- start section of service -->
-<section class="service" data-aos="fade-up" data-aos-anchor-placement="center-center" id="home-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center pt-5 p-5">خدمات الجمعية</h2>
-            </div>
-            @foreach($services as $service)
-                <div class="col">
-                    <div class="card p-3 mb-5 bg-body rounded" style="width: 100%;">
-                        <div class="card-body text-center">
-                            <div class="rounded-circle">
-                                <img class="rounded-circle " src="{{ asset('storage/' . $service->image) }}" alt="">
+<!-- search_box start -->
+<section class="search_side" dir="rtl">
+    <div class="s130 row">
 
-                            </div>
-                            <h5 class="card-title pt-3">{{ $service->name }}</h5>
+        <div class="col-md-9 search_box">
+            <form method="get" action="{{ route('site.news') }}">
+                <div class="inner-form">
+                    <div class="input-field first-wrap">
+                        <div class="svg-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16
+                      9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5
+                      16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49
+                      19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14
+                      7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
                         </div>
+                        <input id="search" name="search" type="text" value="{{$search}}"
+                               placeholder="اكتب كلمات من عنوان الخبر للبحث"/>
+                    </div>
+                    <div class="input-field second-wrap">
+                        <button class="btn-search" type="submit">بحث</button>
                     </div>
                 </div>
-            @endforeach
 
-            <div class="about" data-aos="fade-up" data-aos-anchor-placement="top-center" dir="rtl">
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3 class="text-right pb-2">تعرف علي الجمعية</h3>
-                        <p class="text-right">{{ strip_tags($about->description) }}</p>
-                    </div>
-                    <div class="col-md-4 pt-3">
-                        <div class="row">
-                            @foreach($statistics as $statistic)
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <img src="{{ asset('site/images/family.png') }}" alt="">
-                                        <span class="family-number">+{{ $statistic->count }}</span>
-                                    </div>
-                                    <div class="col">
-                                        <h5 class="text-right family-title">{{ $statistic->name }}</h5>
-                                        <p class="text-right family-paragraph">{{ $statistic->description }}</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            </form>
         </div>
 
-</section>
-<!-- end section of service -->
-<!-- start section about -->
 
-<!-- end secton about -->
+    </div>
+</section>
+<!-- search_box end -->
 <!-- start section of News -->
-<section class="news mt-5" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+<section class="news news_bg mt-5" data-aos="fade-down"
+         data-aos-easing="linear"
+         data-aos-duration="1500">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center pt-5 p-5">اخبار الجمعية</h2>
-            </div>
-            @foreach($news as $item)
-                <a href="{{ route('site.news.show', $item->id) }}">
+            @forelse ($news as $new)
+                <a href="{{ route('site.news.show', $new->id) }}">
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card" style="width: 100%;">
-                            <div class="image-of-news"><img src="{{ asset('storage/' . $item->main_image) }}"
+                            <div class="image-of-news"><img src="{{ asset('storage/' . $new->main_image) }}"
                                                             class="card-img-top hvr-grow"
                                                             alt="..."></div>
 
-                            <span class="date-of-card">{{ $item->created_at->translatedFormat('d F Y') }}</span>
+                            <span class="date-of-card">{{ $new->created_at->translatedFormat('d F Y') }}</span>
                             <div class="card-body">
-                                <h3 class="card-text card-paragraph text-center">{{ $item->title }}</h3>
-                                <p class="card-text text-center text-muted">{{ strip_tags($item->description) }}</p>
+                                <h3 class="card-text card-paragraph text-center">{{ $new->title }}</h3>
+                                <p class="card-text text-center text-muted">{{ strip_tags($new->description) }}</p>
 
                             </div>
                         </div>
                     </div>
                 </a>
-            @endforeach
-            <div class="col-md-12 text-center">
-                <a href="{{ route('site.news') }}" class="btn btn-outline-more hvr-bounce-to-top">المزيد</a>
 
-            </div>
-        </div>
-
-    </div>
-</section>
-<!-- end section of News -->
-<!-- start section project -->
-<section class="project_of_Gameya pt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center pt-5 p-5">مشاريع الجمعية</h2>
-            </div>
-            @foreach($projects as $project)
-                <div class="img-of-project col-lg-4 col-md-12 text-center" data-aos="flip-left"
-                     data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-                    <a href=""><img class="hvr-grow" src="{{ asset('storage/' . $project->main_image) }}" alt=""></a>
-
+            @empty
+                <div class="text-center">
+                    <label for="">لا يوجد</label>
                 </div>
-            @endforeach
-            <div class="col-md-12 text-center">
-                <a href="{{ route('site.projects') }}" class="btn btn-outline-more hvr-bounce-to-top">المزيد</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end section project -->
-<!-- start partners   -->
-<section class="partners" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center pt-5 p-5">شركاء النجاح</h2>
-            </div>
-            @foreach($teams as $team)
-                <div class="col-md-3">
-                    <div class="card bg-white rounded mb-5" style="width: 100%;">
-                        <div class="card-body">
-                            <img width="100%" src="{{ asset('storage/' . $team->image) }}" alt="">
-                        </div>
-                    </div>
-                </div>
-            @endforeach
 
+            @endforelse
+
+            <div class="col-md-12 text-center" dir="rtl">
+                <nav class="text-center">
+                    {!! $news->links() !!}
+
+                </nav>
+                {{--                <nav class="text-center" aria-label="...">--}}
+                {{--                    <ul class="pagination pagination-lg pagination justify-content-center">--}}
+                {{--                        <li class="page-item active" aria-current="page">--}}
+                {{--                            <span class="page-link">1</span>--}}
+                {{--                        </li>--}}
+                {{--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+                {{--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+                {{--                        <li class="page-item"><a class="page-link" href="#">4</a></li>--}}
+                {{--                        <li class="page-item"><a class="page-link" href="#">5</a></li>--}}
+                {{--                    </ul>--}}
+                {{--                </nav>          --}}
+            </div>
         </div>
+
     </div>
 </section>
-<!-- end partners -->
-<!-- start magazine -->
-<section class="magazine mt-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h5>هل تريد المساهمة في هذا الاجر والعمل الخيري</h5>
-                <h3 class="mt-3">ساهم معنا وكن سببا في نجاح ودعم الاعمال الخيرية</h3>
-            </div>
-            <div class="col-md-12 text-center mt-5">
-                <button type="button" class="btn btn-outline-more ">ساهم معنا الان</button>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end magazine -->
+
 <!-- FOOTER START -->
 <footer class="footer" dir="rtl">
     <div class="container">
         <div class="row pt-5 pb-2">
             <div class="col-md-4 footer-logo">
-                <img src="{{ asset('storage/' . App\Models\Websit::latest()->first()->logo) }}"
-                     width="278px" height="131px" alt="{{App\Models\Websit::latest()->first()->websit_title}}">
+                <img src="{{asset('site/images/Group 24.png')}}" width="278px" height="131px"
+                     alt="">
             </div>
             <div class="col-md-4">
                 <h4 class="text-right title_of_category_footer">القائمة الرئيسية</h4>
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="text-right list_of_footer">
+
                             @foreach($menus as $menu)
                                 <li><i class="fa-solid fa-angle-left"></i> <a
                                         href="{{ $menu->link }}">{{ $menu->name }}</a></li>
                             @endforeach
-
-
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -372,5 +314,4 @@
 <script src="{{asset('site/js/jquery.sticky.js')}}"></script>
 <script src="{{asset('site/vendor/aos/aos.min.js')}}"></script>
 <script src="{{asset('site/js/main.js')}}"></script>
-
 </html>

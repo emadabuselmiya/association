@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('title')
-    {{ __('All Sub Services') }}
+    الاحصائيات
 @stop
 @section('css')
     <!-- BEGIN: Vendor CSS-->
@@ -30,7 +30,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">{{ __('All Sub Services') }}</h2>
+                        <h2 class="content-header-title float-left mb-0">الاحصائيات</h2>
 
                     </div>
                 </div>
@@ -39,17 +39,17 @@
         <div class="content-body">
             <!-- users list start -->
             <section class="app-user-list">
+
                 <!-- list section start -->
                 <div class="card">
                     <div class="card-datatable table-responsive pt-0">
-                        <x-alert />
-                        <table class="subservice-list-table table">
+                        <x-alert/>
+                        <table class="statistic-list-table table">
                             <thead class="thead-light">
                             <tr>
-                                <th style="text-align: center;">{{ __('Icon Image') }}</th>
+                                <th>#</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Perant Service') }}</th>
-                                <th>{{ __('Description') }}</th>
+                                <th>قيمة الاحصائية</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                             </thead>
@@ -61,20 +61,93 @@
             </section>
             <!-- users list ends -->
         </div>
+        <div class="modal fade" id="modals-create">
+            <div class="modal-dialog">
+                <form class="add-new-user modal-content pt-0" action="{{route('statistics.store')}}"
+                      method="POST">
+                    @csrf
+                    <div class="modal-header mb-1">
+                        <h5 class="modal-title" id="exampleModalLabel">اضافة الإحصائية</h5>
+                    </div>
+                    <div class="modal-body flex-grow-1">
 
-    @foreach ($sub_services as $service)
+                        <div class="form-group">
+                            <label for="username">اسم الإحصائية</label>
+                            <input type="text" class="form-control"
+                                   name="name" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">قيمة الإحصائية</label>
+                            <input type="number" class="form-control"
+                                   name="count" id="count" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">الوصف</label>
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary mr-1 data-submit">حفظ</button>
+                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">الغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @foreach ($statistics as $statistic)
         <!-- Modal to add new user starts-->
-            <div class="modal fade" id="modals-delete-{{ $service->id }}">
+            <div class="modal fade" id="modals-edit-{{ $statistic->id }}">
                 <div class="modal-dialog">
-                    <form class="add-new-user modal-content pt-0" action="{{route('subservices.destroy',$service->id)}}"
+                    <form class="add-new-user modal-content pt-0" action="{{route('statistics.update',$statistic->id)}}"
+                          method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header mb-1">
+                            <h5 class="modal-title" id="exampleModalLabel">تعديل الإحصائية</h5>
+                        </div>
+                        <div class="modal-body flex-grow-1">
+
+                            <div class="form-group">
+                                <label for="username">اسم الإحصائية</label>
+                                <input type="text" class="form-control" value="{{ $statistic->name }}"
+                                       name="name" id="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username">قيمة الإحصائية</label>
+                                <input type="number" class="form-control" value="{{ $statistic->count }}"
+                                       name="count" id="count" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">الوصف</label>
+                                <textarea name="description" id="description" cols="30" rows="10">{{ $statistic->description }}</textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary mr-1 data-submit">تعديل</button>
+                            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">الغاء
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modals-delete-{{ $statistic->id }}">
+                <div class="modal-dialog">
+                    <form class="add-new-user modal-content pt-0"
+                          action="{{route('statistics.destroy',$statistic->id)}}"
                           method="POST">
                         @csrf
                         @method('DELETE')
                         <div class="modal-header mb-1">
-                            <h5 class="modal-title" id="exampleModalLabel">حذف الخدمة</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">حذف </h5>
                         </div>
                         <div class="modal-body flex-grow-1">
-                            <h4>هل تريد حذف الخدمة؟</h4>
+
+                            <h4>هل تريد حذف الإحصائية؟</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-danger mr-1 data-submit">حذف</button>
@@ -115,4 +188,3 @@
     <!-- END: Page JS-->
 
 @stop
-
