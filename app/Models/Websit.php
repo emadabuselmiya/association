@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use SimpleXMLElement;
 
 class Websit extends Model
 {
@@ -12,7 +13,7 @@ class Websit extends Model
 
     protected $fillable = [
         'websit_title', 'favicon_image', 'logo', 'seo_keyword', 'phone', 'email', 'telephone_number'
-        , 'facebook', 'twitter', 'youtube', 'instagram', 'whatsapp', 'linkedin', 'behance', 'address', 'url'
+        , 'facebook', 'twitter', 'youtube', 'instagram', 'whatsapp', 'linkedin', 'behance', 'address', 'url', 'address_map'
     ];
 
     protected $appends = [
@@ -43,5 +44,11 @@ class Websit extends Model
         }
 
         return Storage::disk('public')->url($this->logo);
+    }
+
+    public function getUrlMap()
+    {
+        preg_match('/src="([^"]+)" /', $this->address_map, $match);
+        return $match[1];
     }
 }

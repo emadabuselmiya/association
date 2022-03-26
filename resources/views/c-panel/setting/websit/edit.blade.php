@@ -237,6 +237,16 @@
                                 {{-- end website behance --}}
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="behance" class="form-label">{{ __('Google Map') }}</label>
+                                        <input type="text" id="address_map" name="address_map"
+                                               value="{{ old('address_map',($website->address_map ?? '')) }}"
+                                               placeholder=""
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                                     <button type="submit" class="btn btn-light">{{ __('Cencel') }}</button>
                                 </div>

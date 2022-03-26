@@ -48,38 +48,7 @@
             </div>
         </div>
 
-        <div class="col-xl-6 col-xxl-6 col-lg-6 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">{{ __('Latest Orders') }}</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table header-border table-hover verticle-middle">
-                            <thead>
-                            <tr>
-                                <th scope="col">{{ __('Client Name') }}</th>
-                                <th scope="col">{{ __('Service') }}</th>
-                                <th scope="col">{{ __('Status') }}</th>
-                                <th scope="col">{{ __('Date') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($orders as $order)
-                                <tr>
-                                    <th><a href="{{ route('orders.edit',$order->id) }}">{{ $order->name }}</a></th>
-                                    <td>{{ $order->service->name }}</td>
-                                    <td>{{ $order->status }}</td>
-                                    <td>{{ Carbon\Carbon::parse($order->created_at)->format('y-m-d') }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6 col-xxl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="col-xl-12 col-xxl-12 col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">{{ __('Latest Contacts') }}</h5>
@@ -89,17 +58,20 @@
                         <table class="table header-border table-hover verticle-middle">
                             <thead>
                             <tr>
-                                <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Email') }}</th>
-                                <th scope="col">{{ __('Date') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Email') }}</th>
+                                <th>الموضوع</th>
+                                <th>{{ __('Message') }}</th>
+                                <th>{{ __('Date') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($contacts as $contact)
                                 <tr>
-                                    <th><a href="{{ route('contacts.show',$contact->id) }}">{{ $contact->name }}</a>
-                                    </th>
+                                    <th><a href="{{ route('contacts.show',$contact->id) }}">{{ $contact->name }}</a></th>
                                     <td>{{ $contact->email }}</td>
+                                    <td>{{ $contact->subject }}</td>
+                                    <td>{{ $contact->message }}</td>
                                     <td>{{ Carbon\Carbon::parse($contact->created_at)->format('y-m-d') }}</td>
                                 </tr>
                             @endforeach

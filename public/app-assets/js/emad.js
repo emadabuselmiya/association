@@ -1447,8 +1447,8 @@ $(function () {
                 // columns according to JSON
                 {data: 'name'},
                 {data: 'email'},
-                {data: 'message'},
                 {data: 'subject'},
+                {data: 'message'},
                 {data: 'date'},
                 {data: 'actions', orderable: false}
             ],

@@ -12,4 +12,10 @@ class VedioAlbum extends Model
     protected $fillable = [
         'name', 'link'
     ];
+
+    public function getIdYoutube()
+    {
+        parse_str(parse_url($this->link, PHP_URL_QUERY), $my_array_of_vars);
+        return $my_array_of_vars['v'];
+    }
 }

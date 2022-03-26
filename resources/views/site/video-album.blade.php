@@ -130,8 +130,7 @@
                                 @endforeach
                                 <li>
                                     <button class="btn btn-outline-more hvr-bounce-to-top"><a
-                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف
-                                        تدعمنا
+                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف تدعمنا
                                     </button>
                                 </li>
 
@@ -168,7 +167,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="card" style="width: 100%;">
                         <div class="image-of-news">
-                            <iframe width="100%" height="345px" src="https://youtu.be/hvcNmGzGgis" allowfullscreen
+                            <iframe width="100%" height="345px" src="https://www.youtube.com/embed/{{$video->getIdYoutube()}}" allowfullscreen
                                     allow="autoplay">
                             </iframe>
 

@@ -130,12 +130,6 @@
                                         @endif
                                     </li>
                                 @endforeach
-                                <li>
-                                    <button class="btn btn-outline-more hvr-bounce-to-top"><a
-                                            href="#gallery-section" class="nav-link"></a>كيف
-                                        تدعمنا
-                                    </button>
-                                </li>
 
                             </ul>
 
@@ -229,22 +223,22 @@
                 <h2 class="text-center pt-5 p-5">اخبار الجمعية</h2>
             </div>
             @foreach($news as $item)
-                <a href="{{ route('site.news.show', $item->id) }}">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card" style="width: 100%;">
-                            <div class="image-of-news"><img src="{{ asset('storage/' . $item->main_image) }}"
-                                                            class="card-img-top hvr-grow"
-                                                            alt="..."></div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card" style="width: 100%;">
+                        <div class="image-of-news"><img src="{{ asset('storage/' . $item->main_image) }}"
+                                                        class="card-img-top hvr-grow"
+                                                        alt="..."></div>
 
-                            <span class="date-of-card">{{ $item->created_at->translatedFormat('d F Y') }}</span>
-                            <div class="card-body">
+                        <span class="date-of-card">{{ $item->created_at->translatedFormat('d F Y') }}</span>
+                        <div class="card-body">
+                            <a href="{{ route('site.news.show', $item->id) }}">
                                 <h3 class="card-text card-paragraph text-center">{{ $item->title }}</h3>
                                 <p class="card-text text-center text-muted">{{ strip_tags($item->description) }}</p>
-
-                            </div>
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
+
             @endforeach
             <div class="col-md-12 text-center">
                 <a href="{{ route('site.news') }}" class="btn btn-outline-more hvr-bounce-to-top">المزيد</a>

@@ -15,6 +15,7 @@ class AddAddressWebite extends Migration
     {
         Schema::table('websits', function (Blueprint $table) {
             $table->string('address')->nullable();
+            $table->text('address_map')->nullable();
 
         });
     }
@@ -28,6 +29,7 @@ class AddAddressWebite extends Migration
     {
         Schema::table('websits', function (Blueprint $table) {
             $table->dropColumn('address');
+            $table->dropColumn('address_map');
         });
     }
 }

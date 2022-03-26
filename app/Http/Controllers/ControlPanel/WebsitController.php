@@ -44,6 +44,7 @@ class WebsitController extends Controller
                 'email' => 'required |email |unique:websits',
                 'telephone_number' => 'required |numeric |min:5 |unique:websits',
                 'phone' => 'required |numeric |min:7 |unique:websits',
+                'address_map' => 'required |string',
                 'seo_keyword' => 'string |nullable',
                 'facebook' => 'nullable |url',
                 'twitter' => 'nullable |url',
@@ -72,12 +73,13 @@ class WebsitController extends Controller
             $webSetting = Websit::create($data);
         }else{
             $request->validate([
-                'websit_title' => 'required |string',
-                'address' => 'string | max:255',
+                'websit_title' => 'required |string | max:255',
+                'address' => 'required |string | max:255',
                 'favicon_image' => 'image |mimes:png',
                 'logo' => 'image |mimes:png',
                 'email' => ['required','email', "unique:websits,email,".$websit->id],
                 'telephone_number' => ["numeric", "min:7"],
+                'address_map' => 'required |string',
                 'phone' => ["numeric", "min:7"],
                 'seo_keyword' => 'string |nullable',
                 'facebook' => 'nullable |url',

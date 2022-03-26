@@ -123,9 +123,9 @@
                                 @endforeach
                                 <li>
                                     <button class="btn btn-outline-more hvr-bounce-to-top"><a
-                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف
-                                        تدعمنا
+                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف تدعمنا
                                     </button>
+
                                 </li>
 
                             </ul>
@@ -234,7 +234,8 @@
 
                         <div class="card-body">
                             <h3 class="card-text card-paragraph text-center pt-3">{{ $client->name }}</h3>
-                            <p class="card-text text-center"><small class="text-muted">{{ $client->name_job }}</small></p>
+                            <p class="card-text text-center"><small class="text-muted">{{ $client->name_job }}</small>
+                            </p>
 
 
                         </div>
