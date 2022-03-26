@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-6">
                 <div class="img_of_post" data-aos="fade-up">
-                    <img src="{{ asset('storage/' . $new->main_image) }}" class="img-fluid" alt="">
+                    <img src="{{ asset('storage/' . $new->main_image) }}" width="100%" class="img-fluid" alt="">
                 </div>
                 <div class="date_of_post text-right pt-3" data-aos="fade-down">
                     <span>التاريخ : {{ $new->created_at->translatedFormat('d F Y') }}</span>
@@ -243,7 +243,10 @@
                                 التالي</a>
                         </li>
 
-                        <li class="col-auto"><img src="{{ asset('storage/' . $new1->main_image) }}" alt=""></li>
+                        <li class="col-auto">
+                            <div class="image_of_new_post">
+                                <img src="{{ asset('storage/' . $new1->main_image) }}" width="120px" class="image-fluid" alt="">
+                            </div></li>
                         <li class="col title_of_next_post">
                             <h5><a href="{{ route('site.news.show', $new1->id) }}">{{ $new1->title }}</a>
                             </h5>
@@ -255,7 +258,7 @@
                 <div class="col-lg-6 text-right">
                     <ul class="row next_post">
 
-                        <li class="col-auto"><img src="{{ asset('storage/' . $new2->main_image) }}" alt=""></li>
+                        <li class="col-auto"> <div class="image_of_new_post"><img src="{{ asset('storage/' . $new2->main_image) }}" width="120px" class="image-fluid" alt=""></div></li>
                         <li class="col title_of_next_post">
 
                             <h5><a href="{{ route('site.news.show', $new2->id) }}">{{ $new2->title }}</a>

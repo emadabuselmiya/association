@@ -168,7 +168,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="card" style="width: 100%;">
                         <div class="image-of-news">
-                            <iframe width="400" height="300" src="{{ $video->link }}" class="card-img-top hvr-grow mb-2">
+                            <iframe width="100%" height="345px" src="https://youtu.be/hvcNmGzGgis" allowfullscreen
+                                    allow="autoplay">
                             </iframe>
 
                         </div>

@@ -208,7 +208,7 @@
     <div class="container">
         <div class="row">
             @forelse ($news as $new)
-                <a href="{{ route('site.news.show', $new->id) }}">
+
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card" style="width: 100%;">
                             <div class="image-of-news"><img src="{{ asset('storage/' . $new->main_image) }}"
@@ -217,13 +217,14 @@
 
                             <span class="date-of-card">{{ $new->created_at->translatedFormat('d F Y') }}</span>
                             <div class="card-body">
+                                <a href="{{ route('site.news.show', $new->id) }}">
                                 <h3 class="card-text card-paragraph text-center">{{ $new->title }}</h3>
                                 <p class="card-text text-center text-muted">{{ strip_tags($new->description) }}</p>
-
+                                </a>
                             </div>
                         </div>
                     </div>
-                </a>
+
 
             @empty
                 <div class="text-center">
