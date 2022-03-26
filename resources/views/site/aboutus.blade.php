@@ -123,7 +123,7 @@
                                 @endforeach
                                 <li>
                                     <button class="btn btn-outline-more hvr-bounce-to-top"><a
-                                            href="{{ route('site.contact-us') }}" class="nav-link"></a>كيف تدعمنا
+                                            href="{{ route('site.contact-us') }}" class="nav-link" style="color: white">كيف تدعمنا</a>
                                     </button>
 
                                 </li>

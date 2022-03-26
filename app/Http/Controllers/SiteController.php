@@ -276,13 +276,28 @@ class SiteController extends Controller
 
     public function view_page($slug)
     {
+
+        $menus = [];
+        foreach (Menu::where('parent_id', 0)->get() as $menu) {
+            if ($menu->pages()->first() == null && count($menu->child) != 0) {
+                $menus[] = $menu;
+            } elseif ($menu->pages()->first() != null) {
+                $menus[] = $menu;
+            } elseif ($menu->static == 1) {
+                $menus[] = $menu;
+            }
+        }
+
         $menu = Menu::where('slug', $slug)->first();
 
         if ($menu->pages()->first() == null) {
             return redirect()->back();
         }
 
-        dd($menu);
+        return view('site.page', [
+            'menus' => $menus,
+            'page' => $menu->pages,
+        ]);
 
     }
 

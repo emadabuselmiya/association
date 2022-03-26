@@ -65,7 +65,7 @@ class MenuController extends Controller
         ]);
         Menu::create($request->all());
 
-        return redirect()->route('menus.index')->with('success', 'Menu Created Successfully!');
+        return redirect()->route('menus.index')->with('success', 'تم إنشاء قائمة بنجاح');
     }
 
 
@@ -87,12 +87,13 @@ class MenuController extends Controller
         ]);
 
         $menu->update($request->all());
-        return redirect()->route('menus.index')->with('success', 'Menu Updated Successfully!');
+        return redirect()->route('menus.index')->with('success', 'تم تعديل القائمة بنجاح');
     }
 
     public function destroy(Menu $menu)
     {
+        $menu->pages()->delete();
         $menu->delete();
-        return redirect()->back()->with('success', 'Menu Deleted Successfully');
+        return redirect()->back()->with('success', 'تم حذف القائمة بنجاح');
     }
 }

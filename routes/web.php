@@ -79,9 +79,8 @@ Route::middleware('auth')
         Route::resource('projects', ProjectController::class);
         Route::resource('pages', PageController::class);
 
-//        Route::resource('pages/static', StaticPagesController::class);
-        Route::get('tt/static', [StaticPagesController::class, 'index'])->name('static.edit');
-        Route::put('tt/static/{id}', [StaticPagesController::class, 'update'])->name('static.update');
+        Route::get('page/static', [StaticPagesController::class, 'index'])->name('static.edit');
+        Route::put('page/static/{id}', [StaticPagesController::class, 'update'])->name('static.update');
 
         Route::resource('blogs', BlogController::class);
         Route::resource('teams', TeamController::class);

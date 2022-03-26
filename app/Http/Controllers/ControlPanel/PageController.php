@@ -25,7 +25,7 @@ class PageController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $pages = Page::where('status', 0)->get();
+            $pages = Page::all();;
             return datatables()->of($pages)
                 ->editColumn('main_image', function (Page $page) {
                     return '<img src="' . asset('storage/' . $page->main_image) . '" width="50" alt="' . $page->title . '">';
@@ -37,7 +37,7 @@ class PageController extends Controller
                     $delete = '<a href="#" class="btn btn-danger btn-sm" data-toggle= "modal" data-target= "#modals-delete-' . $page->id . '">' .
                         'حذف</a>';
                     $edit = ' <a href="' . route('pages.edit', $page->id) . '" class="btn btn-sm btn-primary">تعديل</a>';
-                    $show = ' <a href="' . route('pages.show', $page->id) . '" class="btn btn-sm btn-success">عرض</a>';
+                    $show = ' <a href="' . $page->menu->link . '" class="btn btn-sm btn-success">عرض</a>';
 
                     return $delete . $edit . $show;
 
@@ -46,7 +46,7 @@ class PageController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        $pages = Page::where('status', 0)->get();
+        $pages = Page::all();
         return view('c-panel.pages.index', [
             'pages' => $pages,
         ]);
@@ -60,9 +60,11 @@ class PageController extends Controller
     public function create()
     {
         $menus = [];
-        foreach (Menu::where('status', '<>', 1)->get() as $menu) {
-            if ($menu->pages()->first() == null && count($menu->child) == 0) {
-                $menus[] = $menu;
+        foreach (Menu::all() as $menu) {
+            if ($menu->static != 1) {
+                if ($menu->pages == null && count($menu->child) == 0) {
+                    $menus[] = $menu;
+                }
             }
         }
 
@@ -91,7 +93,6 @@ class PageController extends Controller
             }
 
             $data['main_image'] = $image;
-
             $page = Page::create($data);
 
             $this->insertTags($data['tags'], $page);
@@ -138,9 +139,12 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         $menus = [];
+
         foreach (Menu::all() as $menu) {
-            if ($menu->pages()->first() == null && count($menu->child) == 0) {
-                $menus[] = $menu;
+            if ($menu->static != 1) {
+                if ($menu->pages == null && count($menu->child) == 0) {
+                    $menus[] = $menu;
+                }
             }
         }
         $menus [] = Menu::findOrFail($page->menu_id);
