@@ -259,11 +259,33 @@ class SiteController extends Controller
     public function save_contact_us(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:150',
-            'phone' => 'required|max:150',
-            'email' => 'required|email|max:150',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|numeric|max:255',
+            'email' => 'required|string|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+        ],[
+            'name.required'=>'مطلوب الاسم',
+            'name.string'=>'يرجى إدخال الاسم نص',
+            'name.max:255'=>'يرجى إدخال الاسم نص أقل من 255 حرف',
+
+            'phone.required'=>'مطلوب رقم الهاتف',
+            'phone.string'=>'يرجى إدخال الهاتف نص',
+            'phone.max:255'=>'يرجى إدخال الهاتف نص أقل من 255 حرف',
+
+            'email.required'=>'مطلوب',
+            'email.string'=>'يرجى إدخال البريد الإلكتروني نص',
+            'email.email'=>'يرجى إدخال البريد الإلكتروني نمط ايميل',
+            'email.max:255'=>'يرجى إدخال البريد الإلكتروني نص أقل من 255 حرف',
+
+            'subject.required'=>'مطلوب الموضوع',
+            'subject.string'=>'يرجى إدخال الموضوع نص',
+            'subject.max:255'=>'يرجى إدخال الموضوع نص أقل من 255 حرف',
+
+            'message.required'=>'مطلوب الرسالة',
+            'message.string'=>'يرجى إدخال الرسالة نص',
+
+            'g-recaptcha-response.required'=>'يجب نتأكد من انك إنسان',
         ]);
 
         Contact::create($request->all());

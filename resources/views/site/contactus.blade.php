@@ -27,10 +27,10 @@
           href="{{ asset('storage/' . App\Models\Websit::latest()->first()->favicon_image ?? 'app-assets/images/ico/apple-icon-120.png') }}">
 
     <title>{{App\Models\Websit::latest()->first()->websit_title}}</title>
-
+    <link rel="preconnect" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     @toastr_css
-
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 <body>
@@ -52,23 +52,32 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <div class="d-flex mr-mr-2">
-                            <a href="#" class="d-flex align-items-center ml-4">
+                            <a href="javascript:void(0);" class="d-flex align-items-center ml-4">
                                 <span class="icon-envelope ml-2"></span>
-                                <span class="d-none d-md-inline-block">info@domain.com</span>
+                                <span
+                                    class="d-none d-md-inline-block">{{App\Models\Websit::latest()->first()->email}}</span>
                             </a>
-                            <a href="#" class="d-flex align-items-center ml-4">
+                            <a href="javascript:void(0);" class="d-flex align-items-center ml-4">
                                 <span class="icon-phone ml-2"></span>
-                                <span class="d-none d-md-inline-block" dir="ltr">+96656541112
-                    </span>
+                                <span class="d-none d-md-inline-block"
+                                      dir="ltr">{{App\Models\Websit::latest()->first()->phone }}</span>
                             </a>
                         </div>
                     </div>
                     <div class="col-6 text-left">
                         <div class="mr-auto social-icon">
-                            <a href="#" class="p-2 pl-0"><span class="icon-twitter"></span></a>
-                            <a href="#" class="p-2 pl-0"><span class="icon-facebook"></span></a>
-                            <a href="#" class="p-2 pl-0"><span class="icon-linkedin"></span></a>
-                            <a href="#" class="p-2 pl-0"><span class="icon-instagram"></span></a>
+                            <a href="{{ App\Models\Websit::latest()->first()->twitter ?? 'javascript:void(0);' }}"
+                               class="p-2 pl-0"><span
+                                    class="icon-twitter"></span></a>
+                            <a href="{{ App\Models\Websit::latest()->first()->facebook ?? 'javascript:void(0);' }}"
+                               class="p-2 pl-0"><span
+                                    class="icon-facebook"></span></a>
+                            <a href="{{ App\Models\Websit::latest()->first()->linkedin ?? 'javascript:void(0);' }}"
+                               class="p-2 pl-0"><span
+                                    class="icon-linkedin"></span></a>
+                            <a href="{{ App\Models\Websit::latest()->first()->instagram ?? 'javascript:void(0);' }}"
+                               class="p-2 pl-0"><span
+                                    class="icon-instagram"></span></a>
                         </div>
 
                     </div>
@@ -80,11 +89,15 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-2">
-                        <h1 class="my-0 site-logo"><a href="index.html"><img
-                                    src="images/Group 24.png" width="200px" alt=""></a></h1>
+                        <h1 class="my-0 site-logo">
+                            <a href="{{ route('site.home') }}">
+                                <img src="{{ asset('storage/' . App\Models\Websit::latest()->first()->logo) }}"
+                                     width="200px" alt="{{App\Models\Websit::latest()->first()->websit_title}}">
+                            </a>
+                        </h1>
                     </div>
                     <div class="col-10">
-                        <nav class="site-navigation text-right"role="navigation">
+                        <nav class="site-navigation text-right" role="navigation">
 
                             <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3
                       float-left"><a href="#" class="site-menu-toggle
@@ -155,27 +168,29 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">الاسم</label>
-                            <input type="text" class="form-control" id="inputEmail4" name="name">
+                            <input type="text" class="form-control" id="inputEmail4" value="{{old('name')}}" name="name" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">رقم الجوال</label>
-                            <input type="text" class="form-control" id="inputPassword4" name="phone">
+                            <input type="text" class="form-control" id="inputPassword4" value="{{old('phone')}}" name="phone" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4">البريد الالكتروني</label>
-                            <input type="text" class="form-control" id="inputEmail4" name="email">
+                            <label for="inputEmail4">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="inputEmail4" value="{{old('email')}}" name="email" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">الموضوع</label>
-                            <input type="text" class="form-control" id="inputPassword4" name="subject">
+                            <input type="text" class="form-control" id="inputPassword4" value="{{old('subject')}}" name="subject" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">الرسالة</label>
-                        <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="7"></textarea>
+                        <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="7" required>{{old('message')}}</textarea>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6LdEvhkfAAAAABBNTaFgl-_Xd7eQNcGJgl8oOldy"></div>
+                    <br/>
                     <button type="submit" class="btn btn-primary">ارسال</button>
                 </form>
             </div>
@@ -257,6 +272,14 @@
 @jquery
 @toastr_js
 @toastr_render
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+
 <script src="{{ asset('site/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{ asset('site/js/popper.min.js')}}"></script>
 <script src="{{ asset('site/js/bootstrap.min.js')}}"></script>

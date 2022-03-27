@@ -32,3 +32,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/custom-rtl.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style-rtl.css')}}">
 <!-- END: Custom CSS-->
+<style>
+    body {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+</style>

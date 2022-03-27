@@ -61,7 +61,7 @@ Route::group([
 Route::middleware('auth')
     ->prefix('c-panel')
     ->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('users', [UserController::class, 'index'])->name('all-users');
         Route::get('users/create', [UserController::class, 'create'])->name('create-users');

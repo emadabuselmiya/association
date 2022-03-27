@@ -37,8 +37,8 @@
                                 <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                     <div class="form-group">
                                        <div class="custom-control custom-checkbox ml-1">
-                                            <input type="checkbox" id="remember_me" class="custom-control-input" id="basic_checkbox_1" name="remember">
-                                            <label class="custom-control-label" for="basic_checkbox_1" for="remember_me">{{ __('Remember me') }}</label>
+                                            <input type="checkbox" id="remember_me" class="custom-control-input" name="remember">
+                                            <label class="custom-control-label" for="remember_me">{{ __('Remember me') }}</label>
                                         </div>
                                     </div>
                                     <div class="form-group">

@@ -159,7 +159,7 @@
 
 <!-- end nav bar -->
 <!-- section albums -->
-<section class="albums_of_photo">
+<section class="albums_of_photo" style="background: none">
     <div class="container">
         <div class="row">
 
